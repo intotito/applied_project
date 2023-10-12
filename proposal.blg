@@ -1,17 +1,17 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'proposal.blg'
-[125] biber-MSWIN64:340> INFO - === 
-[169] Biber.pm:419> INFO - Reading 'proposal.bcf'
-[287] Biber.pm:979> INFO - Found 1 citekeys in bib section 0
-[302] Biber.pm:4419> INFO - Processing section 0
-[315] Biber.pm:4610> INFO - Looking for bibtex file 'biblio.bib' for section 0
-[378] bibtex.pm:1713> INFO - LaTeX decoding ...
-[390] bibtex.pm:1519> INFO - Found BibTeX data source 'biblio.bib'
-[428] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[429] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[429] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
-[429] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
-[431] bbl.pm:660> INFO - Writing 'proposal.bbl' with encoding 'UTF-8'
-[433] bbl.pm:763> INFO - Output to proposal.bbl
-[433] Biber.pm:131> WARN - BibTeX subsystem: C:\Users\intot\AppData\Local\Temp\biber_tmp_iYgh\a9e03cb3043b9e2c02591da84105bb68_18820.utf8, line 9, warning: 1 characters of junk seen at toplevel
-[433] Biber.pm:133> INFO - WARNINGS: 1
+[146] biber-MSWIN64:340> INFO - === 
+[204] Biber.pm:419> INFO - Reading 'proposal.bcf'
+[369] Biber.pm:979> INFO - Found 1 citekeys in bib section 0
+[400] Biber.pm:4419> INFO - Processing section 0
+[415] Biber.pm:4610> INFO - Looking for bibtex file 'biblio.bib' for section 0
+[474] bibtex.pm:1713> INFO - LaTeX decoding ...
+[486] bibtex.pm:1519> INFO - Found BibTeX data source 'biblio.bib'
+[535] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[535] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[535] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[535] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[537] bbl.pm:660> INFO - Writing 'proposal.bbl' with encoding 'UTF-8'
+[538] bbl.pm:763> INFO - Output to proposal.bbl
+[538] Biber.pm:131> WARN - BibTeX subsystem: C:\Users\intot\AppData\Local\Temp\biber_tmp_4enK\a9e03cb3043b9e2c02591da84105bb68_17768.utf8, line 9, warning: 1 characters of junk seen at toplevel
+[538] Biber.pm:133> INFO - WARNINGS: 1

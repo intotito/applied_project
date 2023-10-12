@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber proposal"] 1696874435 "proposal.bcf" "proposal.bbl" "proposal" 1696875231 0
+["biber proposal"] 1697136807 "proposal.bcf" "proposal.bbl" "proposal" 1697142253 0
   "./biblio.bib" 1696845220 643 ab3aed7b5698a6551917f92de6b22a4e ""
-  "proposal.bcf" 1696875230 107823 4052fdf805540cb6ced31f6cc16cbf33 "pdflatex"
+  "proposal.bcf" 1697142252 107823 4052fdf805540cb6ced31f6cc16cbf33 "pdflatex"
   (generated)
   "proposal.bbl"
   "proposal.blg"
   (rewritten before read)
-["pdflatex"] 1696875229 "c:/Users/intot/applied_project/proposal.tex" "proposal.pdf" "proposal" 1696875231 0
+["pdflatex"] 1697142251 "c:/Users/intot/applied_project/proposal.tex" "proposal.pdf" "proposal" 1697142253 0
   "C:/Program Files/MiKTeX/fonts/tfm/jknappen/ec/tcrm1000.tfm" 993062508 1436 c7f957a372ef2fbe93c0982f96625e12 ""
   "C:/Program Files/MiKTeX/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "C:/Program Files/MiKTeX/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -67,12 +67,12 @@
   "C:/Users/intot/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1695841961 81107 70b8516c68c2e617189c5e44bfd16b96 ""
   "C:/Users/intot/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1696061090 11548 59a5eb4215cd960876cee7c6a2e98b9a ""
   "C:/Users/intot/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1695843792 24132221 8d61260da8909714cba490c206829ffb ""
-  "c:/Users/intot/applied_project/proposal.tex" 1696875228 5608 47c44575075bef5136dbf76502813cc9 ""
+  "c:/Users/intot/applied_project/proposal.tex" 1697142250 7341 230e8b55fee9f47f17ce16bede4ef2c0 ""
   "images/architecture.png" 1696871653 39110 2350cdcb1574f935aa15e0b0e9dc369b ""
-  "proposal.aux" 1696875230 486 a0c24de5516d598d5c1e27cdd9165871 "pdflatex"
-  "proposal.bbl" 1696874437 1649 9cd2dbb5f51305f3f84726303357349d "biber proposal"
-  "proposal.run.xml" 1696875230 2329 3b4830c3f0be9fc6a6751ddb88fda37e "pdflatex"
-  "proposal.tex" 1696875228 5608 47c44575075bef5136dbf76502813cc9 ""
+  "proposal.aux" 1697142252 486 5323b2cdc4c2929525dce77488e7945b "pdflatex"
+  "proposal.bbl" 1697136810 1649 9cd2dbb5f51305f3f84726303357349d "biber proposal"
+  "proposal.run.xml" 1697142252 2329 3b4830c3f0be9fc6a6751ddb88fda37e "pdflatex"
+  "proposal.tex" 1697142250 7341 230e8b55fee9f47f17ce16bede4ef2c0 ""
   (generated)
   "proposal.aux"
   "proposal.bcf"

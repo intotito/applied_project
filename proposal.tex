@@ -71,6 +71,7 @@
 
 
     \section*{Technologies \& System Architecture}
+    \subsection*{Legacy Architecture}
 
         The overall system architecture is depicted in Figure~\ref{fig:architecture}. The system is made up of three modules 
         interacting with an external API and user devices. The modules are listed as follows:
@@ -81,6 +82,7 @@
                 An Express Node JS Web application deployed on Amazon EC2 Virtual machine, serving as a callback endpoint for 
                 OAuth 2.0 Authentication for the Polar Flow API. 
             \item {Firestore Data Storage}
+                Permanent storage medium for users' test and Biometric data.
         \end{itemize}
         User Devices:
         \begin{itemize}
@@ -93,8 +95,24 @@
         \label{fig:architecture}
         \centering
         \end{figure}
-
-    
+        The actions in the Figure~\ref{fig:architecture} can be summarized as follows:
+        \begin{itemize}
+            \item{sync}: passing of biometric data to a smart phone from a Polar watch.
+            \item {upload}: uploading of biometric data to Polar API repository.
+            \item {OAuth 2.0 flow}: Multi step OAuth 2.0 authentication protocol. 
+            \item {token}: getting verification token from the Callback URL by the user.
+            \item {pull (Polar API - Test Application)}: retrieving biometric data from Polar API by the Test Application.
+            \item {auth}: user supplies token to the Test Application as final step of authentication. 
+            \item {pull (Firebase - Test Application)}: retrieving user test/biometric data for rendering by Test Application.
+            \item {push}: saving users' test/biometric data to a Datastore.
+        \end{itemize}
+    \subsection*{Proposed Architecture}
+    The final system architecture will include new modules to facilitate data analytics using A.I models. The new system calls 
+    for a relational database replica of the Firebase storage to ensure data consistency, predictability and structures suitable
+    for relevant statistical analysis. A.I models as a mini-service that perform operations with supplied data and returns result
+    of analysis. A web Application that functions as a Controller that interfaces the data and A.I modules, Executive Dashboard 
+    capable of rendering user data and results from the A.I models.\\
+    Figure~\ref{fig:proposed-architecture} shows the proposed architecture.
     \section*{Schedule of work}
     \printbibliography
 
