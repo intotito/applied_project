@@ -36,29 +36,28 @@
     This project is a continuation of research work previously done by Fourth Year Software Design Students titled `Biometric 
     Data Collection for Performance Optimization in a Digital Game Scenario' in collaboration with the Department of Sports
      \& Excercise Science, Atlantic Technological University.
-    \subsection*{Previous Project}
+    \subsection*{Previous Projects}
     The originiating project titled \textbf{`Biometric Data Collection for Performance Optimization in a Digital
     Game Sceneiro'}, posed the question `can a player\'s biometrica data be used to optimise their performance in a 
-    first-person shooter game'?. The research was geared towards creating a test environment where players can 
+    first-person shooter game'? And a subsequent follow up project which sought to create a Chart API capable of displaying 
+    all relevant information previously displayed on different pages on a single page.\\
+    The former research was geared towards creating a test environment where players can 
     practice and horn their skills in a similar sceneiros (Weapons, controls, user perspective, ect\..) obtainable in PUBG\:: 
     Battlegrounds in the form of a Unity Desktop {\tt Application}. Collection and storage of Biometric data from an 
     {\tt Activity Monitor} in the form of a {\tt Smart Watch}. With the enventual goal of finding correlation between their
     performance and their Biometric data. 
     \\
-    
-    Further research was conducted by another team of Third Year Software Design Student to develop a module in the form of a
-    `Chart API' that can visualize data generated during the Initial research in a presentable and intuitive manner whereby 
-    all the various user data can be visualized in a unified chart that side by side.
 
     
     \section*{Project Objective}
-        The objective of this research project will seek to address some of the limitation listed in the previous projects as 
-        follows\::
+        The objective of this research project will seek to address some of the limitation listed in the previous projects and
+        complete the future development goals of both projects. 
+        These includes\::
         \begin{itemize}
-            \item {Offline Data Storage}\\
-            Provision will be made for offline temporary file storage to improve the overall reliability of the whole system
-            \item{PUBG API}
-            Further research on new developments in the PUBG API for better user experience. 
+            \item{Chart API Integration}: Integrating the developed Chart API into the Test Application.
+            \item {Offline Data Storage}: Provision will be made for offline temporary file storage to improve the overall 
+            reliability of the whole system
+            \item{PUBG API}: Further research on new developments in the PUBG API for better user experience. 
         \end{itemize} 
         
         And eventually seek to answer the following research questions\::
@@ -110,9 +109,48 @@
     The final system architecture will include new modules to facilitate data analytics using A.I models. The new system calls 
     for a relational database replica of the Firebase storage to ensure data consistency, predictability and structures suitable
     for relevant statistical analysis. A.I models as a mini-service that perform operations with supplied data and returns result
-    of analysis. A web Application that functions as a Controller that interfaces the data and A.I modules, Executive Dashboard 
-    capable of rendering user data and results from the A.I models.\\
-    Figure~\ref{fig:proposed-architecture} shows the proposed architecture.
+    of analysis. A Web Application that functions as a Controller that interfaces the data and A.I modules, Executive Dashboard 
+    that renders user data, results from the A.I Modules and any other relevant information about the system.\\
+    Figure~\ref{fig:proposed-web-architecture} shows the proposed architecture for the System.
+    \begin{figure}[h]
+        \includegraphics[scale=0.675]{images/proposed-architecture.png}
+        \caption{Proposed Architecture}
+        \label{fig:proposed-web-architecture}
+    \end{figure}
+    From the diagram above, additional modules have been added to the system which are: the back-end `Controller', front-end 
+    `Executive Dashboard', a `Relational Database', and A.I Modules. The functions of these modules are explained below:
+    \begin{itemize}
+        \item {Controller}: This module is repsonsible for coordinating data fetch from the Relational Database and making sure 
+        that the Relational Database is always in sync with the Firebase Datastore. It is also responsible for filtering
+        and structuring data being fed into the A.I. Modules and when necessary using the output for an A.I module as input to
+        another A.I module. 
+        \item{Executive Dashboard}: This module provides a Graphical User Interface that displays the working dataset, and 
+        offers interfaces to filter, tune and if necessary bias data being sent to the A.I Modules for analysis. This module will
+        be developed using the Angular Framework with integration of D3.js or Chart.js for displaying relevant charts. The choice 
+        for Angular Framework over other solutions namely ReactJS and Vue is because of the more structured nature of the 
+        Angular Framework which is more suited for collaborative development. 
+        \item{A.I Modules}: These modules are responsible for running analysis on data. The modules accepts input from the 
+        `Controller' and outputs a comprehensive summary of the results of the analysis which is displayed on the 
+        `Executive Dashboard' Module. For this purpose Tensorflow \& Apache Spark were chosen for the following reasons:
+        \begin{itemize}
+            \item{Capabilities}: Apache Spark is capable of performing linear and logical regression which are the common tools
+            used for this class of problem. Tensorflow is also capable of performing the afore-mentioned techniques and can 
+            perform regression using neural network models.  
+            \item {Accessibility}: The both tools are open-source and avialable to the general public.
+            \item {Python API interface}: The both tools provide a Python API. This provide ease of deployment as Python is 
+            platform independent and relatively easy to setup in an Ubuntu Virtual machine. 
+            \item{Large Community}: Both have large community of contributors. Documentation and tutorials are readily available 
+            on the internet. 
+        \end{itemize}
+    \item{Relational Database}: Data for the analysis will be sourced directly from this Database which is a structured replica of
+    the Firestore Database as obtained from the Legacy System. The rationale for this Module is to provide a flexible means of
+    retrieving data in various forms and shape as may be needed for analysis and also overcome the high complexities involved
+    in Firestore for compound queries.
+    \item{Chart API}:  is responsible for dislaying users' test results and biometric data to the users. This already developed 
+    module will be integrated into the `Test Application' and undergo some modification to be able to display custom data as 
+    requirements changes.
+    \end{itemize}
+    
     \section*{Schedule of work}
     \printbibliography
 
