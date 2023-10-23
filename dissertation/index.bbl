@@ -1,0 +1,19 @@
+\begin{thebibliography}{1}
+
+\bibitem{shannon1948mathematical}
+Claude~Elwood Shannon.
+\newblock A mathematical theory of communication.
+\newblock {\em The Bell system technical journal}, 27(3):379--423, 1948.
+
+\bibitem{von2007theory}
+John Von~Neumann and Oskar Morgenstern.
+\newblock Theory of games and economic behavior.
+\newblock In {\em Theory of games and economic behavior}. Princeton university
+  press, 2007.
+
+\bibitem{lin1991divergence}
+Jianhua Lin.
+\newblock Divergence measures based on the shannon entropy.
+\newblock {\em IEEE Transactions on Information theory}, 37(1):145--151, 1991.
+
+\end{thebibliography}

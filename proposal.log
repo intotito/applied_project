@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.9.24) (preloaded format=pdflatex 2023.9.27)  13 OCT 2023 23:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.9.24) (preloaded format=pdflatex 2023.9.27)  15 OCT 2023 09:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -292,39 +292,46 @@ Package biblatex Info: ... and expl3
 Package: xparse 2023-08-29 L3 Experimental document command parser
 )
 Package: blx-case-expl3 2023/03/05 v3.19 expl3 case changing code for biblatex
-))
-\@quotelevel=\count388
-\@quotereset=\count389
+)) (C:\Program Files\MiKTeX\tex/latex/graphics\rotating.sty
+Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
+\c@r@tfl@t=\count388
+\rotFPtop=\skip72
+\rotFPbot=\skip73
+\rot@float@box=\box52
+\rot@mess@toks=\toks18
+)
+\@quotelevel=\count389
+\@quotereset=\count390
  (proposal.aux)
 \openout1 = `proposal.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
  (C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count390
+\scratchcounter=\count391
 \scratchdimen=\dimen143
-\scratchbox=\box52
-\nofMPsegments=\count391
-\nofMParguments=\count392
-\everyMPshowfont=\toks18
-\MPscratchCnt=\count393
+\scratchbox=\box53
+\nofMPsegments=\count392
+\nofMParguments=\count393
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count394
 \MPscratchDim=\dimen144
-\MPnumerator=\count394
-\makeMPintoPDFobject=\count395
-\everyMPtoPDFconversion=\toks19
+\MPnumerator=\count395
+\makeMPintoPDFobject=\count396
+\everyMPtoPDFconversion=\toks20
 ) (C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -344,18 +351,18 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'proposal.bbl' found.
  (proposal.bbl)
-Package biblatex Info: Reference section=0 on input line 12.
-Package biblatex Info: Reference segment=0 on input line 12.
+Package biblatex Info: Reference section=0 on input line 13.
+Package biblatex Info: Reference segment=0 on input line 13.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 14.
+(Font)              <12> on input line 15.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 14.
+(Font)              <8> on input line 15.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 14.
+(Font)              <6> on input line 15.
  [1
 
 {C:/Users/intot/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 40--50
+Underfull \hbox (badness 10000) in paragraph at lines 41--51
 
  []
 
@@ -365,19 +372,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 40--50
 <images/architecture.png, id=18, 313.9228pt x 213.79875pt>
 File: images/architecture.png Graphic file (type png)
 <use images/architecture.png>
-Package pdftex.def Info: images/architecture.png  used on input line 92.
+Package pdftex.def Info: images/architecture.png  used on input line 93.
 (pdftex.def)             Requested size: 313.92203pt x 213.79822pt.
 <images/proposed-architecture.png, id=20, 506.6428pt x 453.94594pt>
 File: images/proposed-architecture.png Graphic file (type png)
 <use images/proposed-architecture.png>
-Package pdftex.def Info: images/proposed-architecture.png  used on input line 116.
+Package pdftex.def Info: images/proposed-architecture.png  used on input line 117.
 (pdftex.def)             Requested size: 341.9846pt x 306.41414pt.
  [3 <./images/architecture.png>] [4 <./images/proposed-architecture.png>] [5]
+<images/schedule.png, id=32, 1042.64531pt x 627.09282pt>
+File: images/schedule.png Graphic file (type png)
+<use images/schedule.png>
+Package pdftex.def Info: images/schedule.png  used on input line 167.
+(pdftex.def)             Requested size: 656.87003pt x 395.07057pt.
+
+Overfull \hbox (106.87003pt too wide) in paragraph at lines 167--168
+[][] 
+ []
+
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 155.
+(Font)              <7> on input line 171.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 155.
- [6
+(Font)              <5> on input line 171.
+[6] [7 <./images/schedule.png>] [8
 
 ] (proposal.aux)
  ***********
@@ -389,17 +406,17 @@ Package logreq Info: Writing requests to 'proposal.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 9413 strings out of 475248
- 180116 string characters out of 5767628
- 1926801 words of memory out of 5000000
- 30882 multiletter control sequences out of 15000+600000
+ 9506 strings out of 475248
+ 181772 string characters out of 5767628
+ 1927801 words of memory out of 5000000
+ 30972 multiletter control sequences out of 15000+600000
  563779 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,8n,81p,712b,1270s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 66i,10n,81p,712b,1230s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\intot\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on proposal.pdf (7 pages, 207472 bytes).
+Output written on proposal.pdf (9 pages, 242724 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
+ 80 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

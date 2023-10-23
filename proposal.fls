@@ -75,6 +75,8 @@ INPUT C:\Program Files\MiKTeX\tex\latex\biblatex\blx-case-expl3.sty
 INPUT C:\Program Files\MiKTeX\tex\latex\biblatex\blx-case-expl3.sty
 INPUT C:\Program Files\MiKTeX\tex\latex\l3packages\xparse\xparse.sty
 INPUT C:\Program Files\MiKTeX\tex\latex\l3packages\xparse\xparse.sty
+INPUT C:\Program Files\MiKTeX\tex\latex\graphics\rotating.sty
+INPUT C:\Program Files\MiKTeX\tex\latex\graphics\rotating.sty
 INPUT .\proposal.aux
 INPUT .\proposal.aux
 INPUT proposal.aux
@@ -130,6 +132,13 @@ INPUT .\images\proposed-architecture.png
 INPUT .\images\proposed-architecture.png
 INPUT .\images\proposed-architecture.png
 INPUT .\images\proposed-architecture.png
+INPUT .\images\schedule.png
+INPUT .\images\schedule.png
+INPUT .\images\schedule.png
+INPUT .\images\schedule.png
+INPUT .\images\schedule.png
+INPUT .\images\schedule.png
+INPUT .\images\schedule.png
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\cm\cmti10.tfm
 INPUT proposal.aux
 INPUT proposal.run.xml

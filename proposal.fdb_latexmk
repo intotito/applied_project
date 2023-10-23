@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber proposal"] 1697235857 "proposal.bcf" "proposal.bbl" "proposal" 1697236842 0
+["biber proposal"] 1697357628 "proposal.bcf" "proposal.bbl" "proposal" 1697358241 0
   "./biblio.bib" 1696845220 643 ab3aed7b5698a6551917f92de6b22a4e ""
-  "proposal.bcf" 1697236841 107823 4052fdf805540cb6ced31f6cc16cbf33 "pdflatex"
+  "proposal.bcf" 1697358240 107823 4052fdf805540cb6ced31f6cc16cbf33 "pdflatex"
   (generated)
   "proposal.bbl"
   "proposal.blg"
   (rewritten before read)
-["pdflatex"] 1697236839 "c:/Users/intot/applied_project/proposal.tex" "proposal.pdf" "proposal" 1697236842 0
+["pdflatex"] 1697358238 "c:/Users/intot/applied_project/proposal.tex" "proposal.pdf" "proposal" 1697358241 0
   "C:/Program Files/MiKTeX/fonts/tfm/jknappen/ec/tcrm1000.tfm" 993062508 1436 c7f957a372ef2fbe93c0982f96625e12 ""
   "C:/Program Files/MiKTeX/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "C:/Program Files/MiKTeX/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -55,6 +55,7 @@
   "C:/Program Files/MiKTeX/tex/latex/graphics/graphics.sty" 1665067579 18387 8f900a490197ebaf93c02ae9476d4b09 ""
   "C:/Program Files/MiKTeX/tex/latex/graphics/graphicx.sty" 1665067579 8010 a8d949cbdbc5c983593827c9eec252e1 ""
   "C:/Program Files/MiKTeX/tex/latex/graphics/keyval.sty" 1665067579 2671 7e67d78d9b88c845599a85b2d41f2e39 ""
+  "C:/Program Files/MiKTeX/tex/latex/graphics/rotating.sty" 1665067579 7060 497c495d7b832441a479571bbce898ae ""
   "C:/Program Files/MiKTeX/tex/latex/graphics/trig.sty" 1665067579 4023 293ea1c16429fc0c4cf605f4da1791a9 ""
   "C:/Program Files/MiKTeX/tex/latex/kvoptions/kvoptions.sty" 1656236481 22555 6d8e155cfef6d82c3d5c742fea7c992e ""
   "C:/Program Files/MiKTeX/tex/latex/kvsetkeys/kvsetkeys.sty" 1665066333 13815 760b0c02f691ea230f5359c4e1de23a7 ""
@@ -67,13 +68,14 @@
   "C:/Users/intot/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1695841961 81107 70b8516c68c2e617189c5e44bfd16b96 ""
   "C:/Users/intot/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1696061090 11548 59a5eb4215cd960876cee7c6a2e98b9a ""
   "C:/Users/intot/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1695843792 24132221 8d61260da8909714cba490c206829ffb ""
-  "c:/Users/intot/applied_project/proposal.tex" 1697236371 10843 e579ce9952cf29c63c761d888f266471 ""
+  "c:/Users/intot/applied_project/proposal.tex" 1697358238 11963 25bddfb5e57687dd953f00f5291dfc7d ""
   "images/architecture.png" 1696871653 39110 2350cdcb1574f935aa15e0b0e9dc369b ""
-  "images/proposed-architecture.png" 1697236711 117719 35d9440901e8ae16aef55c479fbdf451 ""
-  "proposal.aux" 1697236841 665 e30680c2e78b6660ac69ae95a2da22ee "pdflatex"
-  "proposal.bbl" 1697235861 1649 9cd2dbb5f51305f3f84726303357349d "biber proposal"
-  "proposal.run.xml" 1697236841 2329 3b4830c3f0be9fc6a6751ddb88fda37e "pdflatex"
-  "proposal.tex" 1697236371 10843 e579ce9952cf29c63c761d888f266471 ""
+  "images/proposed-architecture.png" 1697354281 120515 7a53a1f2489d544b200f060772446af4 ""
+  "images/schedule.png" 1697358028 51221 ddfc51a4a94f94cb14e10c9c83ddca47 ""
+  "proposal.aux" 1697358240 840 024a1313592627b2dcd6cdd205d6cc2e "pdflatex"
+  "proposal.bbl" 1697357631 1649 9cd2dbb5f51305f3f84726303357349d "biber proposal"
+  "proposal.run.xml" 1697358240 2329 3b4830c3f0be9fc6a6751ddb88fda37e "pdflatex"
+  "proposal.tex" 1697358238 11963 25bddfb5e57687dd953f00f5291dfc7d ""
   (generated)
   "proposal.aux"
   "proposal.bcf"
