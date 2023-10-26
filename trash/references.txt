@@ -1,0 +1,4 @@
+Neural Network technique explanations
+1. (LeCun, Bengio, and Hinton 2015)
+2. (Kindermans et al.2018a)(Simonyan, Vedaldi, and Zisserman 2013)(Montavonet al. 2015).
+3. (Lundberg and Lee 2017)(Kindermans et al. 2018b) (Binder et al. 2016).
