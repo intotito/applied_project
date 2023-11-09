@@ -1,0 +1,10 @@
+# Data Collection Methodology
+
+## Target
+For the project execution there are various hinderance to the quantity of data that can be collected. This is as a result of the limited amount of devices available which can be handed out to volunteer to participate in the trials. Specifically the Activity Monitor which comes in the the form of a Smart Watch and Polar Smatch Watch in particular which have adopted as the means of getting users' biometric data are limited in number and data collection procedure is expected to expensive in time and effort.
+As a result the aim is to get the minimum viable sample size of data possible for the analysis. This defaults the following questions that need to be answered to make sure that the research is being conducted properly, they are:
+- How many samples are required to achieve an acceptable level of performance. 
+- How large must the training set be to sufficiently estimate the performance of the model. 
+Previous studies by G. M. Foody et al already shows that bigger training dataset provides better classification performance over smaller training set. However,
+according to the study of Ramezan CA et al, which explored the effects of the number of training samples on six different machine-learning algorithms, Support Vector Machine (SVM), Random Forest (RF), k-nearest Neighbors (k-NN), Single-layer perceptron neural network(NEU), Learning Vector Quantization (LVQ) and Gradient-Boosted Trees (GMB) to classify a large-area HR remotely sensed dataset; the overall effect to reduced number sample size on the accuracy of the prediction was not significant. For context, a varying sample from 40 to 10,000 was tried out using the afore-mentioned algorithms. RF was found to have got the least hit from accuracy which degraded from $\approx$ 97% to $\approx$ 86% as sample size was reduced from 10000 to 40. Overall all the algorithm seem to perform relatively well at above 80% with a sample size of 40 except for the NEU which degraded to $\approx$ 76%. 
+
