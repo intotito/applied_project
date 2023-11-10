@@ -57,13 +57,14 @@ The purpose of the relational database is to have all data in a tabular form to 
 ### Data
 
 A total of eleven (11) variables are to represented in the database, they are as follows:
-    - Fine Motor: Average Tracking Time
-    - Fine Motor: Accuracy
-    - Visual : Avera0ge Response Time
-    - Visual: Shot Accuracy
-    - Visual: Target Accuracy
-    - Audio: Average Response Time
-    - Biometric Data
+   - Test Data
+        - Fine Motor: Average Tracking Time
+        - Fine Motor: Accuracy
+        - Visual : Average Response Time
+        - Visual: Shot Accuracy
+        - Visual: Target Accuracy
+        - Audio: Average Response Time
+   - Biometric Data
         - Maximum Heart Rate
         - Average Heart Rate
         - Active Steps
