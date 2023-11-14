@@ -29,6 +29,14 @@ Considering the limitations and previous works mentioned in the previous section
 
 ### Biometric Data Collection
 
+The biometric data expected from the activity monitor is expected to be of five (5) different categories which from previous studies suggest might affect indvidual performance in the gaming scenairo. 
+They are: 
+- `Maximum Heart Rate` : The maximum heart rate of the user over the observation period. 
+- `Average Heart Rate` : The average heart rate of the user over the observation period. 
+- `Active Steps`:  Total number of steps taken by the user. 
+- `Heart Rate Variability (HRV)` : Heart Rate Variability of the user. 
+- `Sleep`: Total number of sleep the previous night. 
+
 ### Test Data Collection
 
 The test data is generated at the completion of the test session in the Test Application. A test session consists of three categories of tests, which will be undertaken sequentially in different stages. For quality assurance, the test will be undertaken in a controlled environment using the same hardware in similar condition over the course of the trials.
@@ -43,6 +51,10 @@ For the purpose of the trial, a special designate room has been reserved for the
  - **Fine Motor Test**: designed to test users perception of depth and eye to hand coordination.
     -   `Average Tracking Time`: measure of average time it took for a player to successfully track, engage and elimate a target. 
     -   `Accuracy`: measure of the percentage of shots fired to the number of targets hit.
+
+
+## Volunteer Handling Manual
+
 
 
 
