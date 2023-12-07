@@ -35,6 +35,10 @@ The following weekly schedule will be available for volunteers at various times 
 > *Note: The timing is open for adjustment to suite volunteers*
 
 ## Biometric Data Procedure:
+
+For the very first time of processing a volunteer, some user information will be needed to have them registered with the manufacturer so their data can be synced to to the manufacturers' repository. 
+
+
 **Physical Information**
 
 These are the first group of data to be collected about the individual to register the Monitoring device manufacturer. The data is stored with the manufacturer (Polar) which is GDPR compliant.
@@ -48,8 +52,27 @@ According to the manufacturers' manual, the watch is capable of recording the qu
 
 **Daily Activities**
 
+According to the Activity monitor manufacturers' manual "*Polar device uses an internal 3D accelerometer to record your wrist movements. It analyses the frequency, intensity and regularity of your movements together with your physical information.*" `calories`, `active calories`, `active steps` and their respective durations are collected from through the device. For the purpose of the research, the `active steps` will be used. 
+
+> *Volunteers are expected to wear the previous day for this data to be available.*
+
+-           Active Steps (count)
 
 
+**Nightly Recharge**
+
+From the Activity monitor manufacturers' manual the Nightly Recharge is recorded as follows: *" is an overnight recovery measurement that shows how well your body has coped with overall stress you have experienced lately."* The parameters, measured during roughly the first four hours of your sleep are `heart rate`, `heart rate variability` and `breathing rate`.
+For the purpose of the research, the following parameters and derived parameters will be used: 
+-           Heart Rate Average (bpm)
+-           Heart Rate Maximum (bpm)
+-           Heart Rate Variability (HRV)
+
+
+> *Once again, volunteers are expected to wear the watch to sleep the previous night before their scheduled test*
+
+## Test Data Collection
+
+The various tests that will be played is expected to last approximately 15 minutes. 
 The following metrics of interest will be collected at the end of the test: ``
 
 

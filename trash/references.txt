@@ -1,8 +1,7 @@
-Neural Network technique explanations
-1. (LeCun, Bengio, and Hinton 2015)
-2. (Kindermans et al.2018a)(Simonyan, Vedaldi, and Zisserman 2013)(Montavonet al. 2015).
-3. (Lundberg and Lee 2017)(Kindermans et al. 2018b) (Binder et al. 2016).
-
-Ramezan CA, Warner TA, Maxwell AE, Price BS. Effects of Training Set Size on Supervised Machine-Learning 
-Land-Cover Classification of Large-Area High-Resolution Remotely Sensed Data. Remote Sensing. 2021; 13(3):368. 
-https://doi.org/10.3390/rs13030368
+{
+	"text":"Explain, using examples, the following two terms as they relate to data structures and algorithms:",
+	"sub":[
+		{"text":"Space Complexity","marks":5},
+		{"text":"Time Complexity","marks":4}
+	]
+}

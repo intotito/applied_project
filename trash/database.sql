@@ -9,7 +9,7 @@ CREATE TABLE Stats (
     vx_avg_res_time INT, 
     vx_shot_accuracy FLOAT, 
     vx_trg_accuracy FLOAT, 
-    au_avg_res_time INT, 
+    au_avg_res_timex INT, 
     bm_HR_max INT, 
     bm_HR_avg INT, 
     bm_HR_var FLOAT, 

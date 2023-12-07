@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.9.24) (preloaded format=pdflatex 2023.9.27)  15 OCT 2023 09:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.9.24) (preloaded format=pdflatex 2023.9.27)  7 DEC 2023 12:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -374,12 +374,13 @@ File: images/architecture.png Graphic file (type png)
 <use images/architecture.png>
 Package pdftex.def Info: images/architecture.png  used on input line 93.
 (pdftex.def)             Requested size: 313.92203pt x 213.79822pt.
-<images/proposed-architecture.png, id=20, 506.6428pt x 453.94594pt>
+ [3 <./images/architecture.png>]
+<images/proposed-architecture.png, id=24, 506.6428pt x 453.94594pt>
 File: images/proposed-architecture.png Graphic file (type png)
 <use images/proposed-architecture.png>
 Package pdftex.def Info: images/proposed-architecture.png  used on input line 117.
 (pdftex.def)             Requested size: 341.9846pt x 306.41414pt.
- [3 <./images/architecture.png>] [4 <./images/proposed-architecture.png>] [5]
+ [4 <./images/proposed-architecture.png>] [5]
 <images/schedule.png, id=32, 1042.64531pt x 627.09282pt>
 File: images/schedule.png Graphic file (type png)
 <use images/schedule.png>
@@ -414,7 +415,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  66i,10n,81p,712b,1230s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\intot\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on proposal.pdf (9 pages, 242724 bytes).
+Output written on proposal.pdf (9 pages, 242895 bytes).
 PDF statistics:
  80 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
