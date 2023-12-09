@@ -31,21 +31,27 @@ snapshot.then(data => data.forEach((doc) => {
 
 */
 
-const returnable = [];
+mainMan = [];
+
+async function add(a){
+//    console.log("000000000000000", mainMan.length);
+//    console.log(a);
+    mainMan.push(a);
+}
 
 async function getAllUsersId(){
-    const snapshot = db.collection('users').get();
-    snapshot.then(querySnapshot => {
-            querySnapshot.forEach((result) => {
-                const valuable = {};
+//    const snapshot = db.collection('users').get();
+    const querySnapshot = await db.collection('users').get();
+
+ //   snapshot.then(querySnapshot => {
+            querySnapshot.forEach(async (result) => {
+
                 const user = result.data().handle;
-                valuable._user = user;
-                db.collection('users')
-                .doc(result.id)
-                .collection('tests')
-                .get()
-                .then(querySnapshot1 => {
-                    querySnapshot1.forEach((result1) => {
+                const querySnapshot1 = await db.collection('users').doc(result.id).collection('tests').get();
+//                .then(querySnapshot1 => {
+                    querySnapshot1.forEach(async (result1) => {
+                        const valuable = {};
+                        valuable._user = user;
                         const testData = result1.data();
                         if(testData.timestamp){
                             valuable._date = testData.timestamp?.toDate().toDateString();
@@ -88,20 +94,24 @@ async function getAllUsersId(){
                             valuable.vx_trg_accuracy = null;
                         }
     //                    console.log(result1.id,  result1.data().timestamp.toDate().toDateString())
-                        returnable.push(valuable);
+                        add(valuable);
                     })
+
                 })
-            })
-    });
-    console.log("Na weting na")
-    await sleep(5000);
-    console.log("******************", returnable)
+//            })
+//    });
+
 }
 
-function sleep(ms) {
+function sleeper(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-getAllUsersId();
 
-console.log(returnable);
+async function sleep() {
+    await getAllUsersId();
+    await sleeper(3000);
+    console.log("-------------------", mainMan);
+}
+sleep();
+//getAllUsersId().then(data => console.log(data));
