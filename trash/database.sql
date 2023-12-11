@@ -28,7 +28,7 @@ CREATE TABLE Stats (
     vx_avg_res_time INT, 
     vx_shot_accuracy FLOAT, 
     vx_trg_accuracy FLOAT, 
-    au_avg_res_timex INT, 
+    au_avg_res_time INT, 
     bm_HR_max INT, 
     bm_HR_avg INT, 
     bm_HR_var FLOAT, 
@@ -36,8 +36,6 @@ CREATE TABLE Stats (
     bm_sleep FLOAT,
 
     PRIMARY KEY (_id),
-    INDEX user_search (_date, _user),
-    CONSTRAINT sync_relation
-    FOREIGN KEY sync_foreign_key (_user) REFERENCES Syncs (user_id) 
+    INDEX user_search (_date, _user)
 )Engine=InnoDB;
 

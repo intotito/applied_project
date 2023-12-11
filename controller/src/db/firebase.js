@@ -2,7 +2,6 @@
 //const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
 //const { default: firebase } = require('firebase');
 
-const firebase = require("firebase/auth")
 const {initializeApp} = require('firebase-admin/app')
 const {getFirestore} = require('firebase-admin/firestore')
 

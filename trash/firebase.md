@@ -24,12 +24,24 @@
 `npm install @google-cloud/firestore`
 
 ### Install Google Cloud CLI
-In Powershell
+#### Windows (In Powershell)
 
 ```
 (New-Object Net.WebClient).DownloadFile("https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe", "$env:Temp\GoogleCloudSDKInstaller.exe")
 
 & $env:Temp\GoogleCloudSDKInstaller.exe
+```
+
+#### Linux (Terminal)
+
+```
+curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-456.0.0-linux-x86_64.tar.gz
+
+tar -xf google-cloud-cli-456.0.0-linux-x86_64.tar.gz
+
+./google-cloud-sdk/install.sh
+
+./google-cloud-sdk/bin/gcloud init
 ```
 
 ### Environment Setup
