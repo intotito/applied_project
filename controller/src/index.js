@@ -1,6 +1,8 @@
 //const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 //const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
 require('dotenv').config()
+require('cors')
+const mysql = require('mysql2')
 const firestore = require('./db/firebase')
 
 const express = require('express')
@@ -13,6 +15,13 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
+})
+
+console.log(process.env.DB_ADDRESS)
+const rel_db = mysql.createConnection({
+    host: process.env.DB_ADDRESS,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD, 
 })
 
 //const document = firestore.doc('posts/intro-to-firestore');
@@ -112,6 +121,14 @@ async function sleep() {
     await getAllUsersId();
     await sleeper(3000);
     console.log("-------------------", mainMan);
+    initializeDatabase();
 }
 sleep();
 //getAllUsersId().then(data => console.log(data));
+
+
+function initializeDatabase(){
+    rel_db.connect((err) => {
+        console.log(err)
+    })
+}
