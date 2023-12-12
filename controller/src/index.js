@@ -7,6 +7,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -17,6 +18,12 @@ app.get('/api/dataset', (req, res) => {
         res.json(value);
     });
 });
+
+app.get('/api/sync', (req, res) => {
+    syncDatabase().then((value) => {
+        res.json(value);
+    })
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
@@ -121,6 +128,11 @@ async function getDataSet(){
                 reject(error);
             } else {
                 resolve(result);
+                mysql_db.end((err) => {
+                    if(err){
+                        console.log(err);
+                    }
+                })
                 console.log("fields", field);
             }
         });
@@ -156,7 +168,11 @@ async function initializeDatabase(){
     return datePromise;
 }
 
-function syncDatabase(db, data){
+async function syncDatabase(){
+    const db = await initializeDatabase();
+    const last = await getLatestSyncDate(db);
+    const data = await fetchData(firestore_db, last);
+
     let schema = {
         _id: null,
         _date: null,
@@ -174,7 +190,6 @@ function syncDatabase(db, data){
         bm_sleep: null,
     };
 
-    let last = new Date("December 15, 2002");
     let query = "INSERT INTO Stats(_date, _user, fm_avg_trk_time, fm_accuracy," +
                 "vx_avg_res_time, vx_shot_accuracy, vx_trg_accuracy, au_avg_res_time, bm_HR_max," +
                 "bm_HR_avg, bm_HR_var, bm_act_steps, bm_sleep) VALUES";
@@ -183,13 +198,13 @@ function syncDatabase(db, data){
             last = data[i]._date;
         }
         if(data[i]._date){
-        query += `('${formatDate(data[i]._date)}', '${data[i]._user}', ${data[i].fm_avg_trk_time},` +
-                 `${data[i].fm_accuracy}, ${data[i].vx_avg_res_time}, ${data[i].vx_shot_accuracy} ,` +
-                 `${data[i].vx_trg_accuracy}, ${data[i].au_avg_res_time}, ${data[i].bm_HR_max}, ` +
-                 `${data[i].bm_HR_avg}, ${data[i].bm_HR_var}, ${data[i].bm_act_steps}, ${data[i].bm_sleep})`;
-        if(i != data.length - 1){
-            query += ", "
-        }
+            query += `('${formatDate(data[i]._date)}', '${data[i]._user}', ${data[i].fm_avg_trk_time},` +
+                    `${data[i].fm_accuracy}, ${data[i].vx_avg_res_time}, ${data[i].vx_shot_accuracy} ,` +
+                    `${data[i].vx_trg_accuracy}, ${data[i].au_avg_res_time}, ${data[i].bm_HR_max}, ` +
+                    `${data[i].bm_HR_avg}, ${data[i].bm_HR_var}, ${data[i].bm_act_steps}, ${data[i].bm_sleep})`;
+            if(i != data.length - 1){
+                query += ", "
+            }
         }
     }
     query += ";"
@@ -202,6 +217,12 @@ function syncDatabase(db, data){
     db.query(query1, ((error, results, field) => {
         console.log("Query Result", results, error, field);
     }));
+
+    mysql_db.end((err) => {
+        if(err){
+            console.log(err);
+        }
+    });
 }
 
 function formatDate(date){
