@@ -1,5 +1,5 @@
 require('dotenv').config()
-require('cors')
+const cors = require('cors')
 const mysql = require('mysql2')
 const firestore = require('./db/firebase')
 const firestore_db = firestore.firestore;
