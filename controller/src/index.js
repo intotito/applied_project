@@ -12,26 +12,25 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+app.get('/api/dataset', (req, res) => { 
+    getDataSet().then((value) => {
+        res.json(value);
+    });
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-mainMan = [];
-
-async function add(a){
-    mainMan.push(a);
-}
-
 async function fetchData(db, start){
+    console.log("Start: ", start);
     return new Promise(async (resolve, reject) => {
         data = [];
         const querySnapshot = await db.collection('users').get();
         for(let j = 0; j < querySnapshot.docs.length; j++){
             let result = querySnapshot.docs[j];
-//        querySnapshot.forEach(async (result) => {
             const user = result.data().handle;
-            const querySnapshot1 = await db.collection('users').doc(result.id).collection('tests').get();
-  //          querySnapshot1.forEach(async (result1) => {
+            const querySnapshot1 = await db.collection('users').doc(result.id).collection('tests').where('timestamp', '>', start).get();
             for(let i = 0; i < querySnapshot1.docs.length; i++){
                 let result1 = querySnapshot1.docs[i];
                 const valuable = {
@@ -90,11 +89,8 @@ async function fetchData(db, start){
                     valuable.vx_trg_accuracy = null;
                 }
                 data.push(valuable);
-   //             add(valuable);
             }
-   //         );
         }
-  //      );
         resolve(data);
     })
 }
@@ -116,6 +112,20 @@ async function getLatestSyncDate(db){
     });
 }
 
+async function getDataSet(){
+    return new Promise(async (resolve, reject) => {
+        const mysql_db = await initializeDatabase();
+        const query = `SELECT * FROM Stats;`
+        mysql_db.query(query, (error, result, field) => {
+            if(error){
+                reject(error);
+            } else {
+                resolve(result);
+                console.log("fields", field);
+            }
+        });
+    });
+}
 
 async function main() {
     const mysql_db = await initializeDatabase();
@@ -186,8 +196,6 @@ function syncDatabase(db, data){
 
     let query1 = `INSERT INTO Syncs (user_id, class_id, sync_date) VALUES ('intotito', 0, '${formatDate(last.toDateString())}');`;
 
- //   console.log("Latest Addition: ", last);
-
     db.query(query, ((error, results, field) => {
         console.log("Query Result", results, error, field);
     }));
@@ -210,5 +218,3 @@ function formatDate(date){
     return `${year}-${month}-${day} ${hour}:${minute}:${seconds}.${milSeconds}`
 }
 
-
-main();
