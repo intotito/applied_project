@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-12-17T22:28:33.124Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.2 Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36" etag="LVcmQoeo36E2glyG4j46" version="22.1.2" type="device">
+<mxfile host="Electron" modified="2023-12-18T01:53:38.749Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.2 Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36" etag="GmAVhBSjq4PMXfH7VgVZ" version="22.1.2" type="device">
   <diagram name="Page-1" id="pohsM1h_aM3U84qmuc9b">
-    <mxGraphModel dx="2687" dy="680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2714" dy="621" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -612,8 +612,8 @@
         <mxCell id="iu8-RB0KxR7VK4IVvlN8-13" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="1565" y="676" width="230" height="207" as="geometry" />
         </mxCell>
-        <mxCell id="iu8-RB0KxR7VK4IVvlN8-14" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 18px;&quot;&gt;&lt;b style=&quot;&quot;&gt;ELASTIC&lt;br&gt;LOAD&lt;br&gt;BALANCER&lt;br&gt;&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-          <mxGeometry x="1657" y="682.5600000000001" width="130" height="80" as="geometry" />
+        <mxCell id="iu8-RB0KxR7VK4IVvlN8-14" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 18px;&quot;&gt;&lt;b style=&quot;&quot;&gt;AWS&amp;nbsp;&lt;br&gt;CERTIFICATE&lt;br&gt;MANAGER&lt;br&gt;&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1642" y="682.5600000000001" width="160" height="80" as="geometry" />
         </mxCell>
         <mxCell id="iu8-RB0KxR7VK4IVvlN8-15" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;b style=&quot;font-size: 18px; font-family: &amp;quot;Comic Sans MS&amp;quot;; background-color: initial;&quot;&gt;Type: SSL/TSL&lt;/b&gt;&lt;/div&gt;&lt;font face=&quot;Comic Sans MS&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;b style=&quot;font-size: 18px; background-color: initial;&quot;&gt;Domain: zerofourtwo.net&lt;/b&gt;&lt;/div&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;b&gt;Encryption: RSA&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;b&gt;Authority: Amazon&lt;/b&gt;&lt;/div&gt;&lt;/span&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="1560" y="766.59" width="240" height="110" as="geometry" />
@@ -651,8 +651,8 @@
         <mxCell id="iu8-RB0KxR7VK4IVvlN8-26" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 18px;&quot;&gt;&lt;b style=&quot;&quot;&gt;RELATIONAL&lt;br&gt;DATABASE&lt;br&gt;SERVICE&lt;br&gt;&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
           <mxGeometry x="1972" y="681.7600000000001" width="150" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="iu8-RB0KxR7VK4IVvlN8-27" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;b style=&quot;font-size: 18px; font-family: &amp;quot;Comic Sans MS&amp;quot;; background-color: initial;&quot;&gt;Type:&amp;nbsp;&lt;/b&gt;&lt;/div&gt;&lt;font face=&quot;Comic Sans MS&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;b style=&quot;font-size: 18px; background-color: initial;&quot;&gt;Domain: zerofourtwo.net&lt;/b&gt;&lt;/div&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;b&gt;Encryption: RSA&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;b&gt;Authority: Amazon&lt;/b&gt;&lt;/div&gt;&lt;/span&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-          <mxGeometry x="1885" y="765.7900000000001" width="240" height="110" as="geometry" />
+        <mxCell id="iu8-RB0KxR7VK4IVvlN8-27" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;b style=&quot;font-size: 18px; font-family: &amp;quot;Comic Sans MS&amp;quot;; background-color: initial;&quot;&gt;Type: db.t3.micro&lt;/b&gt;&lt;/div&gt;&lt;font face=&quot;Comic Sans MS&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;b style=&quot;font-size: 18px; background-color: initial;&quot;&gt;Engine: MySQL Commun.&lt;/b&gt;&lt;/div&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1885" y="780.7900000000001" width="240" height="80" as="geometry" />
         </mxCell>
         <mxCell id="iu8-RB0KxR7VK4IVvlN8-28" value="" style="endArrow=none;html=1;rounded=0;exitX=1.012;exitY=1.007;exitDx=0;exitDy=0;exitPerimeter=0;strokeWidth=4;fillColor=#f5f5f5;gradientColor=#b3b3b3;strokeColor=#666666;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
