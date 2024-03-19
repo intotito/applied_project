@@ -9,10 +9,10 @@ const port = 3000
 
 app.use(cors());
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
-
+    
 app.get('/api/dataset', (req, res) => { 
     getDataSet().then((value) => {
         res.json(value);
