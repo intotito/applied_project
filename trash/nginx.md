@@ -17,8 +17,8 @@ server {
     location /api {
         proxy_pass http://localhost:3000;
     }
-    location /api {
-        proxy_pass http://localhost:8000;
+    location /dashboard {
+        proxy_pass http://localhost:4200;
     }
 }
 ```
