@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({ path: require('find-config')('.env') })
 const cors = require('cors')
 const mysql = require('mysql2')
 const firestore = require('./db/firebase')
@@ -12,7 +12,7 @@ app.use(cors());
 app.get('/api', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
-    
+
 app.get('/api/dataset', (req, res) => { 
     getDataSet().then((value) => {
         res.json(value);
@@ -157,11 +157,13 @@ async function initializeDatabase(){
         database: process.env.DB_DATABASE
     })
     const datePromise = new Promise((resolve, reject) => {
+        console.log(process.env);
         rel_db.connect((err) => {
             if(!err){
                 resolve(rel_db);
             } else {
-                reject(error);
+                console.log(err);
+                reject(err);
             }
         });
     });
