@@ -30,14 +30,49 @@ app.listen(port, () => {
 })
 
 async function fetchData(db, start){
+    start = new Date("2021-03-25");
     console.log("Start: ", start);
+    let quit = 0;
     return new Promise(async (resolve, reject) => {
         data = [];
+        dataWatch = [];
         const querySnapshot = await db.collection('users').get();
         for(let j = 0; j < querySnapshot.docs.length; j++){
             let result = querySnapshot.docs[j];
             const user = result.data().handle;
             const querySnapshot1 = await db.collection('users').doc(result.id).collection('tests').where('timestamp', '>', start).get();
+            const querySnapshot2 = await db.collection('users').doc(result.id).collection('watches').where('timestamp', '>', start).get();
+            for(let i = 0; i < querySnapshot2.docs.length; i++){
+                let result2 = querySnapshot2.docs[i];
+                const valuable = {
+                    _date: null,
+                    bm_HR_max: null,
+                    bm_HR_avg: null,
+                    bm_HR_var: null,
+                    bm_act_steps: null,
+                    bm_sleep: null,
+                };
+                const testData = await result2.data();
+                valuable._date = testData.timestamp?.toDate();
+                const polar = testData.polar;
+        //        console.log(polar)
+                if(polar?.recharges){
+                    valuable.bm_HR_var = polar.recharges.hrv;
+                    valuable.bm_HR_avg = polar.recharges.heartRateAvg;
+                    valuable.bm_sleep = polar.recharges.nightlyRechargeStatus;
+                } 
+                if(polar?.physicalInfo){
+                    valuable.bm_HR_max = polar.physicalInfo.maxiHeartRate;
+                }
+                if(polar?.activity){
+                    valuable.bm_act_steps = polar.activity.activeSteps;
+                }
+                dataWatch.push(valuable);
+            }
+            
+           
+
+
             for(let i = 0; i < querySnapshot1.docs.length; i++){
                 let result1 = querySnapshot1.docs[i];
                 const valuable = {
@@ -97,9 +132,32 @@ async function fetchData(db, start){
                 }
                 data.push(valuable);
             }
+
+            for(let k = 0; k < data.length; k++){
+                let date1 = data[k]._date;
+                for(let m = 0; m < dataWatch.length; m++){
+                    let date2 = dataWatch[m]._date;
+                    if(compareDates(date1, date2)){
+                        // assign dataWatch[m] to data[k]
+                        data[k].bm_HR_max =     dataWatch[m].bm_HR_max;
+                        data[k].bm_HR_avg =     dataWatch[m].bm_HR_avg;
+                        data[k].bm_HR_var =     dataWatch[m].bm_HR_var;
+                        data[k].bm_act_steps =  dataWatch[m].bm_act_steps
+                        data[k].bm_sleep =      dataWatch[m].bm_sleep;
+                        console.log("Big Prize: ", data[k]);
+                    }
+                }
+            }
+
         }
         resolve(data);
     })
+}
+
+function compareDates(date1, date2){
+    return date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate();
 }
 
 function sleep(ms) {
@@ -159,7 +217,7 @@ async function initializeDatabase(){
         database: process.env.DB_DATABASE
     })
     const datePromise = new Promise((resolve, reject) => {
-        console.log(process.env);
+   //     console.log(process.env);
         rel_db.connect((err) => {
             if(!err){
                 resolve(rel_db);
@@ -176,7 +234,6 @@ async function syncDatabase(){
     const db = await initializeDatabase();
     var last = await getLatestSyncDate(db);
     const data = await fetchData(firestore_db, last);
-
     let schema = {
         _id: null,
         _date: null,
@@ -222,7 +279,7 @@ async function syncDatabase(){
         console.log("Query Result", results, error, field);
     }));
 
-    mysql_db.end((err) => {
+    db.end((err) => {
         if(err){
             console.log(err);
         }
@@ -230,8 +287,9 @@ async function syncDatabase(){
 }
 
 function formatDate(date){
-    if(!date){
-        return '0000-00-00 00:00:00';
+    if(typeof date == 'string'){
+        date = new Date(date);
+        console.log(date, typeof date);
     }
     let year = date.getFullYear();
     let month = date.getMonth();
