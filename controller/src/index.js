@@ -1,4 +1,4 @@
-require('dotenv').config({ path: require('find-config')('.env') })
+require('dotenv').config({ path:('./../.env') })
 const cors = require('cors')
 const mysql = require('mysql2')
 const firestore = require('./db/firebase')
