@@ -30,7 +30,7 @@ app.listen(port, () => {
 })
 
 async function fetchData(db, start){
-    start = new Date("2021-03-25");
+ //   start = new Date("2021-03-25");
     console.log("Start: ", start);
     let quit = 0;
     return new Promise(async (resolve, reject) => {
@@ -69,7 +69,7 @@ async function fetchData(db, start){
                 }
                 dataWatch.push(valuable);
             }
-            
+          
            
 
 
@@ -95,6 +95,8 @@ async function fetchData(db, start){
                 const testData = await result1.data();
                 if(testData.timestamp){
                     valuable._date = testData.timestamp?.toDate();
+                    if(j == 7)
+                    console.log(valuable)
                 } else {
                     valuable._date = null;
                 }
@@ -133,31 +135,36 @@ async function fetchData(db, start){
                 data.push(valuable);
             }
 
-            for(let k = 0; k < data.length; k++){
-                let date1 = data[k]._date;
-                for(let m = 0; m < dataWatch.length; m++){
-                    let date2 = dataWatch[m]._date;
-                    if(compareDates(date1, date2)){
-                        // assign dataWatch[m] to data[k]
-                        data[k].bm_HR_max =     dataWatch[m].bm_HR_max;
-                        data[k].bm_HR_avg =     dataWatch[m].bm_HR_avg;
-                        data[k].bm_HR_var =     dataWatch[m].bm_HR_var;
-                        data[k].bm_act_steps =  dataWatch[m].bm_act_steps
-                        data[k].bm_sleep =      dataWatch[m].bm_sleep;
-                        console.log("Big Prize: ", data[k]);
-                    }
+            
+        }
+        for(let k = 0; k < data.length; k++){
+            let date1 = data[k]._date;
+            for(let m = 0; m < dataWatch.length; m++){
+                let date2 = dataWatch[m]._date;
+                if(compareDates(date1, date2)){
+                    // assign dataWatch[m] to data[k]
+                    data[k].bm_HR_max =     dataWatch[m].bm_HR_max;
+                    data[k].bm_HR_avg =     dataWatch[m].bm_HR_avg;
+                    data[k].bm_HR_var =     dataWatch[m].bm_HR_var;
+                    data[k].bm_act_steps =  dataWatch[m].bm_act_steps
+                    data[k].bm_sleep =      dataWatch[m].bm_sleep;
+                //    console.log("Big Prize: ", data[k]);
                 }
             }
-
         }
+
         resolve(data);
     })
 }
 
 function compareDates(date1, date2){
-    return date1.getFullYear() === date2.getFullYear() &&
+
+    value =  date1.getFullYear() === date2.getFullYear() &&
     date1.getMonth() === date2.getMonth() &&
     date1.getDate() === date2.getDate();
+ //   console.log('comparing: ', date1, date2, value)
+    
+    return value;
 }
 
 function sleep(ms) {
@@ -180,8 +187,13 @@ async function getLatestSyncDate(db){
 }
 
 async function getDataSet(){
+    console.log('We are here people!!!!!!!!!!')
+
     return new Promise(async (resolve, reject) => {
+        console.log('Did we get here people!!!!!!!!!!')
+
         const mysql_db = await initializeDatabase();
+
         const query = `SELECT * FROM Stats;`
         mysql_db.query(query, (error, result, field) => {
             if(error){
@@ -216,7 +228,7 @@ async function initializeDatabase(){
         password: process.env.DB_PASSWORD, 
         database: process.env.DB_DATABASE
     })
-    const datePromise = new Promise((resolve, reject) => {
+    const dbPromise = new Promise((resolve, reject) => {
    //     console.log(process.env);
         rel_db.connect((err) => {
             if(!err){
@@ -227,7 +239,7 @@ async function initializeDatabase(){
             }
         });
     });
-    return datePromise;
+    return dbPromise;
 }
 
 async function syncDatabase(){
