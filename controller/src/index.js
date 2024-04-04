@@ -15,7 +15,12 @@ app.get('/api', (req, res) => {
 
 app.get('/api/dataset', (req, res) => { 
     getDataSet().then((value) => {
+        console.log("Value", value)
         res.json(value);
+    }).catch(error => {
+        res.status(202).send('<h1>Empty Data</h1>'
+        )
+        console.log(error)
     });
 });
 
@@ -197,6 +202,7 @@ async function getDataSet(){
         const query = `SELECT * FROM Stats;`
         mysql_db.query(query, (error, result, field) => {
             if(error){
+                console.log(error)
                 reject(error);
             } else {
                 resolve(result);
