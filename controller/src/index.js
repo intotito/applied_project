@@ -8,14 +8,30 @@ const app = express()
 const port = 3000
 
 app.use(cors());
-
+app.use(express.urlencoded({extended: true}));
 app.get('/api', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
 
 app.get('/api/dataset', (req, res) => { 
-    getDataSet().then((value) => {
-        console.log("Value", value)
+    console.log('Request params', req.query['submit']);
+    let whereClause = ''
+    if(req.query['submit'] && req.query['submit'] === 'clean'){
+        console.log("params", req.query['columns']);
+        let array = req.query['columns'];
+        let isArray = Array.isArray(array);
+        let qry = isArray ? ' WHERE ' : ` WHERE ${array} IS NOT NULL `;
+        for(let i = 0; i < array.length && isArray; i++){
+            qry += `${array[i]} IS NOT NULL`;
+            if(i != array.length - 1){
+                qry += ' AND ';
+            }
+        }
+        console.log('Query', qry);
+        whereClause = qry;
+    }
+    getDataSet(whereClause).then((value) => {
+ //       console.log("Value", value)
         res.json(value);
     }).catch(error => {
         res.status(202).send('<h1>Empty Data</h1>'
@@ -27,6 +43,9 @@ app.get('/api/dataset', (req, res) => {
 app.get('/api/sync', (req, res) => {
     syncDatabase().then((value) => {
         res.json(value);
+    }).catch(error => {
+        res.status(505).send('<h1>Syncing failed</h1>')
+        console.log(error)
     })
 })
 
@@ -191,7 +210,7 @@ async function getLatestSyncDate(db){
     });
 }
 
-async function getDataSet(){
+async function getDataSet(whereClause){
     console.log('We are here people!!!!!!!!!!')
 
     return new Promise(async (resolve, reject) => {
@@ -199,7 +218,7 @@ async function getDataSet(){
 
         const mysql_db = await initializeDatabase();
 
-        const query = `SELECT * FROM Stats;`
+        const query = `SELECT * FROM Stats ${whereClause};`
         mysql_db.query(query, (error, result, field) => {
             if(error){
                 console.log(error)
@@ -291,7 +310,7 @@ async function syncDatabase(){
     let query1 = `INSERT INTO Syncs (user_id, class_id, sync_date) VALUES ('intotito', 0, '${formatDate(last.toDateString())}');`;
 
     db.query(query, ((error, results, field) => {
-        console.log("Query Result", results, error, field);
+        console.log("Query Result", results, "Error: ", error, "Fields: ", field);
     }));
     db.query(query1, ((error, results, field) => {
         console.log("Query Result", results, error, field);
