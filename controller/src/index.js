@@ -4,6 +4,9 @@ const mysql = require('mysql2')
 const firestore = require('./db/firebase')
 const firestore_db = firestore.firestore;
 const express = require('express')
+const jwt = require("jsonwebtoken");
+
+
 const app = express()
 const port = 3000
 
@@ -13,7 +16,25 @@ app.get('/api', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
 
+const authorizeBearer = (req, res, next) => {
+    if(req.headers && req.headers.authorization){
+        let token = req.headers.authorization.split(' ')[1];
+        const decodedToken = jwt.verify(token, process.env.API_JWT_KEY);
+        if(decodedToken){
+            res.locals.userId = decodedToken.userId;
+            next();
+        } else {
+            res.status(401).send('<h1>Unauthorized, Invalid or Expired Token</h1>');
+        }
+    } else {
+        res.status(401).send('<h1>Unauthorized, No Authentication Token Provided</h1>');
+    }
+};     
+
+app.use(authorizeBearer);
+
 app.get('/api/dataset', (req, res) => { 
+    //const headers = req.headers.authorization.split(' ');
     console.log('Request params', req.query['submit']);
     let whereClause = ''
     if(req.query['submit'] && req.query['submit'] === 'clean'){
@@ -41,7 +62,7 @@ app.get('/api/dataset', (req, res) => {
 });
 
 app.get('/api/sync', (req, res) => {
-    syncDatabase().then((value) => {
+    syncDatabase(res.locals.userId).then((value) => {
         res.json(value);
     }).catch(error => {
         res.status(505).send('<h1>Syncing failed</h1>')
@@ -237,10 +258,28 @@ async function getDataSet(whereClause){
 }
 
 async function main() {
-    const mysql_db = await initializeDatabase();
-    const start = await getLatestSyncDate(mysql_db);
-    const data = await fetchData(firestore_db, start);
-    console.log(data);
+/*    console.log(process.env.API_JWT_KEY);
+    let token;
+    try {
+        //Creating jwt token
+        token = jwt.sign(
+            {
+                userId: 'intotito',
+            },
+            process.env.API_JWT_KEY,
+        );
+        console.log('Token: ', token);
+    } catch (err) {
+        console.log(err);
+        const error =
+            new Error("Error! Something went wrong.");
+        return next(error);
+    }
+*/
+    //    const mysql_db = await initializeDatabase();
+//    const start = await getLatestSyncDate(mysql_db);
+//    const data = await fetchData(firestore_db, start);
+//    console.log(data);
  //   await sleep(3000);
  //   console.log(mainMan);
 //    syncDatabase(mysql_db, mainMan);
@@ -267,7 +306,7 @@ async function initializeDatabase(){
     return dbPromise;
 }
 
-async function syncDatabase(){
+async function syncDatabase(userId){
     const db = await initializeDatabase();
     var last = await getLatestSyncDate(db);
     const data = await fetchData(firestore_db, last);
@@ -307,7 +346,7 @@ async function syncDatabase(){
     }
     query += ";"
 
-    let query1 = `INSERT INTO Syncs (user_id, class_id, sync_date) VALUES ('intotito', 0, '${formatDate(last.toDateString())}');`;
+    let query1 = `INSERT INTO Syncs (user_id, class_id, sync_date) VALUES ('${userId}', 0, '${formatDate(last.toDateString())}');`;
 
     db.query(query, ((error, results, field) => {
         console.log("Query Result", results, "Error: ", error, "Fields: ", field);
