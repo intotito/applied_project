@@ -1,21 +1,26 @@
 require('dotenv').config({ path:('./../.env') })
 const cors = require('cors')
-const mysql = require('mysql2')
+//const mysql = require('mysql2')
 const firestore = require('./db/firebase')
 const firestore_db = firestore.firestore;
 const express = require('express')
-const jwt = require("jsonwebtoken");
-
+//const jwt = require("jsonwebtoken");
+const {compareDates, formatDate, enforceDigits} = require('./utils/utils');
+const {authorizeBearer} = require('./utils/authorization');
+const {initializeDatabase, getLatestSyncDate} = require('./db/rel_db');
 
 const app = express()
 const port = 3000
+
+//module.exports = app;
+
 
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.get('/api', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
-
+/*
 const authorizeBearer = (req, res, next) => {
     if(req.headers && req.headers.authorization){
         let token = req.headers.authorization.split(' ')[1];
@@ -30,7 +35,7 @@ const authorizeBearer = (req, res, next) => {
         res.status(401).send('<h1>Unauthorized, No Authentication Token Provided</h1>');
     }
 };     
-
+*/
 app.use(authorizeBearer);
 
 app.get('/api/dataset', (req, res) => { 
@@ -75,8 +80,6 @@ app.listen(port, () => {
 })
 
 async function fetchData(db, start){
- //   start = new Date("2021-03-25");
-    console.log("Start: ", start);
     let quit = 0;
     return new Promise(async (resolve, reject) => {
         data = [];
@@ -140,8 +143,8 @@ async function fetchData(db, start){
                 const testData = await result1.data();
                 if(testData.timestamp){
                     valuable._date = testData.timestamp?.toDate();
-                    if(j == 7)
-                    console.log(valuable)
+//                    if(j == 7)
+//                    console.log(valuable)
                 } else {
                     valuable._date = null;
                 }
@@ -202,20 +205,11 @@ async function fetchData(db, start){
     })
 }
 
-function compareDates(date1, date2){
-
-    value =  date1.getFullYear() === date2.getFullYear() &&
-    date1.getMonth() === date2.getMonth() &&
-    date1.getDate() === date2.getDate();
- //   console.log('comparing: ', date1, date2, value)
-    
-    return value;
-}
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
+/*
 async function getLatestSyncDate(db){
     return new Promise((resolve, reject) => {
         query = `SELECT MAX(sync_date) AS latest_date FROM Syncs;`;
@@ -230,7 +224,7 @@ async function getLatestSyncDate(db){
         });
     });
 }
-
+*/
 async function getDataSet(whereClause){
     console.log('We are here people!!!!!!!!!!')
 
@@ -284,7 +278,7 @@ async function main() {
  //   console.log(mainMan);
 //    syncDatabase(mysql_db, mainMan);
 }
-
+/*
 async function initializeDatabase(){
     const rel_db = mysql.createConnection({
         host: process.env.DB_ADDRESS,
@@ -305,10 +299,11 @@ async function initializeDatabase(){
     });
     return dbPromise;
 }
-
+*/
 async function syncDatabase(userId){
     const db = await initializeDatabase();
     var last = await getLatestSyncDate(db);
+    console.log('Last Sync Date:::::::::::::::::::::::: ', last )
     const data = await fetchData(firestore_db, last);
     let schema = {
         _id: null,
@@ -327,18 +322,20 @@ async function syncDatabase(userId){
         bm_sleep: null,
     };
 
-    let query = "INSERT INTO Stats(_date, _user, fm_avg_trk_time, fm_accuracy," +
-                "vx_avg_res_time, vx_shot_accuracy, vx_trg_accuracy, au_avg_res_time, bm_HR_max," +
+    let query = "INSERT INTO Stats(_date, _user, fm_avg_trk_time, fm_accuracy, " +
+                "vx_avg_res_time, vx_shot_accuracy, vx_trg_accuracy, au_avg_res_time, bm_HR_max, " +
                 "bm_HR_avg, bm_HR_var, bm_act_steps, bm_sleep) VALUES";
     for(let i = 0; i < data.length; i++){
         if(data[i]._date && data[i]._date > last){
             last = data[i]._date;
         }
         if(data[i]._date){
-            query += `('${formatDate(data[i]._date)}', '${data[i]._user}', ${data[i].fm_avg_trk_time},` +
+            let buff = `('${formatDate(data[i]._date)}', '${data[i]._user}', ${data[i].fm_avg_trk_time},` +
                     `${data[i].fm_accuracy}, ${data[i].vx_avg_res_time}, ${data[i].vx_shot_accuracy} ,` +
                     `${data[i].vx_trg_accuracy}, ${data[i].au_avg_res_time}, ${data[i].bm_HR_max}, ` +
-                    `${data[i].bm_HR_avg}, ${data[i].bm_HR_var}, ${data[i].bm_act_steps}, ${data[i].bm_sleep})`;
+                    `${data[i].bm_HR_avg || null}, ${data[i].bm_HR_var || null}, ${data[i].bm_act_steps || null}, ${data[i].bm_sleep || null})`;
+            query += buff
+            console.log('Buff --------------------- ', buff);
             if(i != data.length - 1){
                 query += ", "
             }
@@ -346,13 +343,14 @@ async function syncDatabase(userId){
     }
     query += ";"
 
+    
     let query1 = `INSERT INTO Syncs (user_id, class_id, sync_date) VALUES ('${userId}', 0, '${formatDate(last.toDateString())}');`;
 
     db.query(query, ((error, results, field) => {
         console.log("Query Result", results, "Error: ", error, "Fields: ", field);
     }));
     db.query(query1, ((error, results, field) => {
-        console.log("Query Result", results, error, field);
+        console.log("Query Result1", results, error, field);
     }));
 
     db.end((err) => {
@@ -362,18 +360,41 @@ async function syncDatabase(userId){
     });
 }
 
-function formatDate(date){
+/*
+exports.formatDate = (date) => {
     if(typeof date == 'string'){
         date = new Date(date);
-        console.log(date, typeof date);
     }
+//    console.log('----------------------', date)
     let year = date.getFullYear();
-    let month = date.getMonth();
-    let day = date.getDay();
-    let hour = date.getHours();
-    let minute = date.getMinutes();
-    let seconds = date.getSeconds();
-    let milSeconds = date.getMilliseconds();
-    return `${year}-${month}-${day} ${hour}:${minute}:${seconds}.${milSeconds}`
+    let month = exports.enforceDigits(date.getMonth() + 1, 2);
+    let day = exports.enforceDigits(date.getDate(), 2);
+    let hour = exports.enforceDigits(date.getHours(), 2);
+    let minute = exports.enforceDigits(date.getMinutes(), 2);
+    let seconds = exports.enforceDigits(date.getSeconds(), 2);
+    let milSeconds = exports.enforceDigits(date.getMilliseconds(), 3);
+    let value =  `${year}-${month}-${day}T${hour}:${minute}:${seconds}.${milSeconds}`
+ //   console.log('value &&&&&&&&&&&&&&&&& ', 'MilSecs', milSeconds, 'Secs', seconds, 'Min.', minute, 'Hour', hour, 'Day', day, 'Month', month, 'Year', year, value)
+    return value;
 }
 
+// method that turns int value to digits number of digits
+exports.enforceDigits = function(num, digits){
+    let str = num.toString();
+    while(str.length < digits){
+        str = '0' + str;
+    }
+    return str;
+}
+
+function compareDates(date1, date2){
+
+    value =  date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate();
+ //   console.log('comparing: ', date1, date2, value)
+    
+    return value;
+}
+
+*/
