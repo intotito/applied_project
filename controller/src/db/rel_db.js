@@ -1,4 +1,5 @@
-const mysql = require('mysql2')
+const mysql = require('mysql2');
+
 exports.initializeDatabase = async function (){
     const rel_db = mysql.createConnection({
         host: process.env.DB_ADDRESS,
