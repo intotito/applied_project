@@ -5,7 +5,9 @@ const express = require('express')
 const {formatDate} = require('./utils/utils');
 const {authorizeBearer} = require('./utils/authorization');
 const {initializeDatabase, getLatestSyncDate} = require('./db/rel_db');
-const {fetchData} = require('./db/firebase')
+const {fetchData} = require('./db/firebase');
+const fs = require('fs');
+const path = require('path');
 
 const app = express()
 const port = 3000
@@ -54,11 +56,51 @@ app.get('/api/sync', (req, res) => {
         console.log(error)
     })
 })
+// this is the endpoint that resets the database
+app.get('/api/reset', (req, res) => {
+    resetDatabase().then((value) => {
+        res.json(value);
+    }).catch(error => {
+        res.status(505).send('<h1>Reset failed</h1>')
+        console.log(error)
+    })
+})
+
+
 
 // starts the server at port 3000
 app.listen(port, () => {
   console.log(`Controller Running at port: ${port}`)
 })
+
+// this function resets the database
+resetDatabase = async function (){
+    return new Promise(async (resolve, reject) => {
+        const db = await initializeDatabase();
+        const filePath = path.join('./db/', 'database.sql');
+        const queries = fs.readFileSync(filePath).toString().split(';');
+        // print out the queries
+        for(let i = 0; i < queries.length; i++){
+            let query = queries[i].trim();
+            // ignore if string starts with '#'
+            if(query.startsWith('#') || query.length == 0){
+                continue;
+            }
+            db.query(query, (error, result, field) => {
+                if(error){
+                    console.log(error);
+                    reject(error);
+                }
+            });
+        }
+        db.end((err) => {
+            if(err){
+                console.log(err);
+            }
+        });
+        resolve("Database Reset");
+    })
+};
 
 // this function gets the dataset from the database
 async function getDataSet(whereClause){
@@ -95,12 +137,11 @@ async function syncDatabase(userId){
             last = data[i]._date;
         }
         if(data[i]._date){
-            let buff = `('${formatDate(data[i]._date)}', '${data[i]._user}', ${data[i].fm_avg_trk_time},` +
+            query += `('${formatDate(data[i]._date)}', '${data[i]._user}', ${data[i].fm_avg_trk_time},` +
                     `${data[i].fm_accuracy}, ${data[i].vx_avg_res_time}, ${data[i].vx_shot_accuracy} ,` +
                     `${data[i].vx_trg_accuracy}, ${data[i].au_avg_res_time}, ${data[i].bm_HR_max}, ` +
                     `${data[i].bm_HR_avg || null}, ${data[i].bm_HR_var || null}, ${data[i].bm_act_steps || null}, ${data[i].bm_sleep || null})`;
-            query += buff
-            console.log('Buff --------------------- ', buff);
+            
             if(i != data.length - 1){
                 query += ", "
             }
@@ -109,10 +150,10 @@ async function syncDatabase(userId){
     query += ";"  
     let query1 = `INSERT INTO Syncs (user_id, class_id, sync_date) VALUES ('${userId}', 0, '${formatDate(last.toDateString())}');`;
     db.query(query, ((error, results, field) => {
-        console.log("Query Result", results, "Error: ", error, "Fields: ", field);
+        console.log("Query Result", results, 'Error:', error);
     }));
     db.query(query1, ((error, results, field) => {
-        console.log("Query Result1", results, error, field);
+        console.log("Query Result1", results, 'Error:', error);
     }));
 
     db.end((err) => {

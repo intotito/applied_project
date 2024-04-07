@@ -1,22 +1,22 @@
+// this function formats a date to a string in the format 'YYYY-MM-DDTHH:MM:SS.MMM'
 exports.formatDate = (date) => {
+    // catch string as date input
     if(typeof date == 'string'){
         date = new Date(date);
     }
-//    console.log('----------------------', date)
     let year = date.getFullYear();
-    let month = exports.enforceDigits(date.getMonth() + 1, 2);
-    let day = exports.enforceDigits(date.getDate(), 2);
-    let hour = exports.enforceDigits(date.getHours(), 2);
-    let minute = exports.enforceDigits(date.getMinutes(), 2);
-    let seconds = exports.enforceDigits(date.getSeconds(), 2);
-    let milSeconds = exports.enforceDigits(date.getMilliseconds(), 3);
+    let month = enforceDigits(date.getMonth() + 1, 2);
+    let day = enforceDigits(date.getDate(), 2);
+    let hour = enforceDigits(date.getHours(), 2);
+    let minute = enforceDigits(date.getMinutes(), 2);
+    let seconds = enforceDigits(date.getSeconds(), 2);
+    let milSeconds = enforceDigits(date.getMilliseconds(), 3);
     let value =  `${year}-${month}-${day}T${hour}:${minute}:${seconds}.${milSeconds}`
- //   console.log('value &&&&&&&&&&&&&&&&& ', 'MilSecs', milSeconds, 'Secs', seconds, 'Min.', minute, 'Hour', hour, 'Day', day, 'Month', month, 'Year', year, value)
     return value;
 }
 
 // method that turns int value to digits number of digits
-exports.enforceDigits = function(num, digits){
+enforceDigits = function(num, digits){
     let str = num.toString();
     while(str.length < digits){
         str = '0' + str;
