@@ -1,5 +1,5 @@
 // this function formats a date to a string in the format 'YYYY-MM-DDTHH:MM:SS.MMM'
-exports.formatDate = (date) => {
+formatDate = (date) => {
     // catch string as date input
     if(typeof date == 'string'){
         date = new Date(date);
@@ -25,9 +25,15 @@ enforceDigits = function(num, digits){
 }
 
 // method that compares two dates
-exports.compareDates = function(date1, date2){
+compareDates = function(date1, date2){
     value =  date1.getFullYear() === date2.getFullYear() &&
     date1.getMonth() === date2.getMonth() &&
     date1.getDate() === date2.getDate();    
     return value;
 }
+
+module.exports = {
+    formatDate: formatDate,
+    compareDates: compareDates,
+    enforceDigits: enforceDigits
+};

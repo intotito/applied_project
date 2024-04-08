@@ -1,7 +1,6 @@
 const mysql = require('mysql2');
 
-
-exports.initializeDatabase = async function (){
+initializeDatabase = async function (){
     const rel_db = mysql.createConnection({
         host: process.env.DB_ADDRESS,
         user: process.env.DB_USER,
@@ -22,7 +21,7 @@ exports.initializeDatabase = async function (){
     return dbPromise;
 }
 
-exports.getLatestSyncDate = async function (db){
+getLatestSyncDate = async function (db){
     return new Promise((resolve, reject) => {
         query = `SELECT MAX(sync_date) AS latest_date FROM Syncs;`;
         db.query(query, (error, result, field) => {
@@ -36,3 +35,8 @@ exports.getLatestSyncDate = async function (db){
         });
     });
 }
+
+module.exports = {
+    initializeDatabase: initializeDatabase,
+    getLatestSyncDate: getLatestSyncDate
+};

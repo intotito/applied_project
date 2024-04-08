@@ -1,10 +1,10 @@
 var assert = require('assert');
 const {formatDate, enforceDigits, compareDates} = require('../src/utils/utils');
+const {initializeDatabase} = require('../src/db/rel_db');
 
 // after all tests
 after(function () {
   console.log('after all tests');
-  
 });
 
 // Date formatting tests
@@ -32,3 +32,16 @@ describe('Date Formatting', function () {
     });
 });
 
+// Database Connection test
+describe('Database Connection', function () {
+    describe('connect()', function () {
+        it('should connect to the database', function () {
+            db_connection = initializeDatabase().then((db) => {
+                assert.equal(db.state, 'authenticated');
+                db_connection.end();
+            }).catch((err) => {
+                console.log('Error:', err);
+            })
+        });
+    });
+});

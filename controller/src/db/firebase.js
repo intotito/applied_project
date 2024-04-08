@@ -1,7 +1,3 @@
-//const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
-//const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
-//const { default: firebase } = require('firebase');
-
 const {initializeApp} = require('firebase-admin/app')
 const {getFirestore} = require('firebase-admin/firestore')
 const {compareDates} = require('./../utils/utils')
@@ -27,13 +23,12 @@ const firebaseConfig = {
     appId: APP_ID,
     measurementId: MEASUREMENT_ID
 };
-
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-
-exports.fetchData = async function (start){
+// fetches data from firebase
+fetchData = async function (start){
     let db = getFirestore();
-    let quit = 0;
     return new Promise(async (resolve, reject) => {
         data = [];
         dataWatch = [];
@@ -56,7 +51,6 @@ exports.fetchData = async function (start){
                 const testData = await result2.data();
                 valuable._date = testData.timestamp?.toDate();
                 const polar = testData.polar;
-        //        console.log(polar)
                 if(polar?.recharges){
                     valuable.bm_HR_var = polar.recharges.hrv;
                     valuable.bm_HR_avg = polar.recharges.heartRateAvg;
@@ -70,34 +64,17 @@ exports.fetchData = async function (start){
                 }
                 dataWatch.push(valuable);
             }
-          
-           
-
-
             for(let i = 0; i < querySnapshot1.docs.length; i++){
                 let result1 = querySnapshot1.docs[i];
                 const valuable = {
-                    _id: null,
-                    _date: null,
-                    _user: null,
-                    fm_avg_trk_time: null,
-                    fm_accuracy: null,
-                    vx_avg_res_time: null,
-                    vx_shot_accuracy: null,
-                    vx_trg_accuracy: null,
-                    au_avg_res_time: null,
-                    bm_HR_max: null,
-                    bm_HR_avg: null,
-                    bm_HR_var: null,
-                    bm_act_steps: null,
-                    bm_sleep: null,
+                    _id: null, _date: null, _user: null, fm_avg_trk_time: null, fm_accuracy: null,
+                    vx_avg_res_time: null, vx_shot_accuracy: null, vx_trg_accuracy: null, au_avg_res_time: null, 
+                    bm_HR_max: null, bm_HR_avg: null, bm_HR_var: null, bm_act_steps: null, bm_sleep: null,
                 };
                 valuable._user = user;
                 const testData = await result1.data();
                 if(testData.timestamp){
                     valuable._date = testData.timestamp?.toDate();
-//                    if(j == 7)
-//                    console.log(valuable)
                 } else {
                     valuable._date = null;
                 }
@@ -134,9 +111,7 @@ exports.fetchData = async function (start){
                     valuable.vx_trg_accuracy = null;
                 }
                 data.push(valuable);
-            }
-
-            
+            }     
         }
         for(let k = 0; k < data.length; k++){
             let date1 = data[k]._date;
@@ -149,20 +124,13 @@ exports.fetchData = async function (start){
                     data[k].bm_HR_var =     dataWatch[m].bm_HR_var;
                     data[k].bm_act_steps =  dataWatch[m].bm_act_steps
                     data[k].bm_sleep =      dataWatch[m].bm_sleep;
-                //    console.log("Big Prize: ", data[k]);
                 }
             }
         }
-
         resolve(data);
     })
 }
 
-
-
-
-/*
 module.exports = {
-    firestore: getFirestore()//getDatabase//getFirestore()//db.firestore(),
+    fetchData: fetchData
 };
-*/
