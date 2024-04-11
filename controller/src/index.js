@@ -8,6 +8,8 @@ const {initializeDatabase, getLatestSyncDate} = require('./db/rel_db');
 const {fetchData} = require('./db/firebase');
 const fs = require('fs');
 const path = require('path');
+const {execSync} = require('child_process');
+const os = require('os');
 
 const app = express()
 const port = 3000
@@ -15,13 +17,56 @@ const port = 3000
 app.use(cors());
 // allows json and urlencoded requests
 app.use(express.urlencoded({extended: true}));
-
+//app.use(authorizeBearer);
 // test endpoint
 app.get('/api', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
 
-app.use(authorizeBearer);
+app.get('/api/ai', authorizeBearer, (req, res) => {
+    // create a 6 digit hexadecimal hashcode with current timestamp
+    // current epoch time in milliseconds
+    
+    const hash = Math.floor(new Date().getTime()).toString(16);
+    var tmpDir = '';
+    try{
+        tmpDir = fs.mkdirSync(path.join(os.tmpdir(), hash));
+    } catch (err){
+        console.error('*************************************', err);
+    } 
+        console.log('----------------- Temporary Directory: ----------------------------------- ', tmpDir)
+
+        const result = execSync(`python ./../../tensorflow/ai.py ${hash}`, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`exec error: ${error}`);
+                return;
+            }
+            console.log(`stdout: ${stdout}`);
+            console.error(`stderr: ${stderr}`);
+        });
+        console.log(result.toString(), '--------------------------------------------------------------');
+        res.send(result.toString());
+    
+})
+
+
+
+app.get('/api/analyze/:session/', (req, res) => {
+    console.log(req.params.session, req.params.file);
+    let dir = path.join(os.tmpdir(), req.params.session);
+    if(!req.query.file){
+        if(fs.existsSync(dir)){
+            const files = fs.readdirSync(dir);
+            res.send(files);
+        } else {
+            res.send('<h1>Session not found</h1>');
+        }
+    } else{
+        let file = path.join(os.tmpdir(), req.params.session, req.query.file);
+        res.sendFile(file);
+    }
+});
+
 // this is the endpoint that returns the dataset
 app.get('/api/dataset', (req, res) => { 
     console.log('Request params', req.query['submit']);
@@ -48,7 +93,7 @@ app.get('/api/dataset', (req, res) => {
 });
 
 // this is the endpoint that syncs the database
-app.get('/api/sync', (req, res) => {
+app.get('/api/sync', authorizeBearer, (req, res) => {
     syncDatabase(res.locals.userId).then((value) => {
         res.json(value);
     }).catch(error => {
@@ -57,7 +102,7 @@ app.get('/api/sync', (req, res) => {
     })
 })
 // this is the endpoint that resets the database
-app.get('/api/reset', (req, res) => {
+app.get('/api/reset', authorizeBearer, (req, res) => {
     resetDatabase().then((value) => {
         res.json(value);
     }).catch(error => {
