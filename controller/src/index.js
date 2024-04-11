@@ -21,9 +21,9 @@ app.use(express.urlencoded({extended: true}));
 // test endpoint
 app.get('/api', (req, res) => {
   res.send('<h1>Hello World!</h1>')
-})
+});
 
-app.get('/api/ai', authorizeBearer, (req, res) => {
+app.get('/api/ai', (req, res) => {
     // create a 6 digit hexadecimal hashcode with current timestamp
     // current epoch time in milliseconds
     
@@ -46,25 +46,19 @@ app.get('/api/ai', authorizeBearer, (req, res) => {
         });
         console.log(result.toString(), '--------------------------------------------------------------');
         res.send(result.toString());
+    });
     
-})
 
-
-
-app.get('/api/analyze/:session/', (req, res) => {
+app.get('/api/images/:session/:file', (req, res) => {
     console.log(req.params.session, req.params.file);
     let dir = path.join(os.tmpdir(), req.params.session);
-    if(!req.query.file){
         if(fs.existsSync(dir)){
-            const files = fs.readdirSync(dir);
-            res.send(files);
+            let file = path.join(os.tmpdir(), req.params.session, req.params.file);
+            res.sendFile(file);
         } else {
             res.send('<h1>Session not found</h1>');
-        }
-    } else{
-        let file = path.join(os.tmpdir(), req.params.session, req.query.file);
-        res.sendFile(file);
-    }
+        }        
+    
 });
 
 // this is the endpoint that returns the dataset
