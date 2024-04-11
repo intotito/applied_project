@@ -36,7 +36,7 @@ app.get('/api/ai', (req, res) => {
     } 
         console.log('----------------- Temporary Directory: ----------------------------------- ', tmpDir)
 
-        const result = execSync(`python ./../../tensorflow/ai.py ${hash}`, (error, stdout, stderr) => {
+        const result = execSync(`python3 ${process.env.AI_ADDRESS1} ${hash}`, (error, stdout, stderr) => {
             if (error) {
                 console.error(`exec error: ${error}`);
                 return;
