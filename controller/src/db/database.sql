@@ -7,8 +7,19 @@ CREATE DATABASE DATA_BANK;
 USE DATA_BANK;
 
 DROP TABLE IF EXISTS Stats;
-
 DROP TABLE IF EXISTS Syncs;
+DROP TABLE IF EXISTS Paths;
+
+CREATE TABLE Paths (
+    _id INT AUTO_INCREMENT, 
+    _date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    session_id VARCHAR(16),
+    status INT DEFAULT 0, 
+
+    INDEX session_index(session_id)
+    PRIMARY KEY (_id)
+)Engine=InnoDB;
+
 CREATE TABLE Syncs (
     _id INT AUTO_INCREMENT, 
     user_id VARCHAR(64), 

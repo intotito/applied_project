@@ -20,7 +20,7 @@ hash = sys.argv[1]
 
 def main(hash):
     headers = {"Authorization": f"Bearer {os.getenv('API_SECRET_KEY')}"}
-    df = pd.read_json(r'https://zerofourtwo.net/api/dataset', storage_options=headers)
+    df = pd.read_json(r'http://localhost:3000/api/dataset', storage_options=headers)
     if(df is None or df.empty):
         return json.dumps({"error": "No data found"})
     

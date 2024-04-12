@@ -21,6 +21,22 @@ initializeDatabase = async function (){
     return dbPromise;
 }
 
+queueRequest = async function(path){
+    return new Promise(async (resolve, reject) => {
+        db = await initializeDatabase();
+        query = `INSERT INTO Paths (session_id) VALUES ('${path}');`;
+        db.query(query, (error, result, field) => {
+            if(error){
+                console.log(error);
+                reject(false);
+            }
+            else {
+                resolve(true);
+            }
+        });
+    });
+}
+
 getLatestSyncDate = async function (db){
     return new Promise((resolve, reject) => {
         query = `SELECT MAX(sync_date) AS latest_date FROM Syncs;`;
@@ -38,5 +54,6 @@ getLatestSyncDate = async function (db){
 
 module.exports = {
     initializeDatabase: initializeDatabase,
-    getLatestSyncDate: getLatestSyncDate
+    getLatestSyncDate: getLatestSyncDate,
+    queue: queueRequest
 };

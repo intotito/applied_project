@@ -4,7 +4,7 @@ const cors = require('cors')
 const express = require('express')
 const {formatDate} = require('./utils/utils');
 const {authorizeBearer} = require('./utils/authorization');
-const {initializeDatabase, getLatestSyncDate} = require('./db/rel_db');
+const {initializeDatabase, getLatestSyncDate, queue} = require('./db/rel_db');
 const {fetchData} = require('./db/firebase');
 const fs = require('fs');
 const path = require('path');
@@ -35,19 +35,22 @@ app.get('/api/ai', (req, res) => {
     } catch (err){
         console.error('*************************************', err);
     } 
-        console.log('----------------- Temporary Directory: ----------------------------------- ', tmpDir)
-        console.log('Home Directory: ', process.env.HOMEPATH, os.homedir(), process.env.AI_ADDRESS_2, process.env.PROJECT_PATH);
-        const result = execSync(`python ${process.env.HOMEPATH}/${process.env.PROJECT_PATH}/${process.env.AI_ADDRESS_2} ${hash}`, {timeout: 120000},(error, stdout, stderr) => {
-            if (error) {
-                console.error(`exec error: ${error}`);
-                return;
-            }
-            console.log(`stdout: ${stdout}`);
-            console.error(`stderr: ${stderr}`);
-        });
-        console.log('-----------------', result.toString(), '--------------------------------------------------------------');
-        res.json(JSON.parse(result.toString()));
+//    console.log('----------------- Temporary Directory: ----------------------------------- ', tmpDir)
+//    console.log('Home Directory: ', process.env.HOMEPATH, os.homedir(), process.env.AI_ADDRESS_2, process.env.PROJECT_PATH);
+    const result = exec(`python3 ${process.env.HOME}/${process.env.PROJECT_PATH}/${process.env.AI_ADDRESS_2} ${hash}`, {timeout: 120000},(error, result, stderr) => {
+        if (error) {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log(`stdout: ${result}`);
+        console.error(`stderr: ${stderr}`);
+
     });
+ //   console.log('-----------------', result.toString(), '--------------------------------------------------------------');
+    //res.json(JSON.parse(result.toString()));
+        queue(hash)
+        res.json({session: hash});
+});
     
 
 app.get('/api/images/:session/:file', (req, res) => {
