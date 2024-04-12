@@ -62,27 +62,32 @@ def main(hash):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=4217)
 
     # create Neural Network model with 3 input and 6 output
-    model = tf.keras.models.Sequential()
-    model.add(tf.keras.layers.Dense(3, input_dim=3, activation='tanh'))
-    model.add(tf.keras.layers.Dense(10, activation='tanh'))
-    model.add(tf.keras.layers.Dense(15, activation='tanh'))
-    model.add(tf.keras.layers.Dense(6, activation='tanh'))
+    #model.add(tf.keras.layers.Dense(3, input_dim=3, activation='tanh'))
+    #model.add(tf.keras.layers.Dense(10, activation='tanh'))
+    #model = tf.keras.models.Sequential()
+    #model.add(tf.keras.layers.Dense(15, activation='tanh'))
+    #model.add(tf.keras.layers.Dense(6, activation='tanh'))
 
     # compile model
-    model.compile(optimizer='adam', loss='mean_squared_error')
+    #model.compile(optimizer='adam', loss='mean_squared_error')
 
 
     # train model
-    fitting = model.fit(X_train, y_train, epochs=1000, batch_size=10, verbose=0)
+    #fitting = model.fit(X_train, y_train, epochs=400, batch_size=10, verbose=0)
+
+    #model.save('./ann_model.h5')
+
+    #load model
+    model = tf.keras.models.load_model('./ann_model.h5')
 
     # plot training and validation loss
-    plt.plot(model.history.history['loss'])
-    plt.title('Training Loss')
-    plt.ylabel('loss')
-    plt.xlabel('epoch')
-    plt.legend(['train', 'test'], loc='upper left')
-    plt.savefig(tempfile.gettempdir() + "/" + hash + "/training_loss.png")
-    plt.close()
+    #plt.plot(model.history.history['loss'])
+    #plt.title('Training Loss')
+    #plt.ylabel('loss')
+    #plt.xlabel('epoch')
+    #plt.legend(['train', 'test'], loc='upper left')
+    #plt.savefig(tempfile.gettempdir() + "/" + hash + "/training_loss.png")
+    #plt.close()
 
     # predict
     y_pred = model.predict(X_test, verbose=0)
