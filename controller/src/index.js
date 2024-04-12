@@ -20,6 +20,7 @@ app.use(express.urlencoded({extended: true}));
 //app.use(authorizeBearer);
 // test endpoint
 app.get('/api', (req, res) => {
+    console.log(process.env)
   res.send('<h1>Hello World!</h1>')
 });
 
@@ -35,8 +36,8 @@ app.get('/api/ai', (req, res) => {
         console.error('*************************************', err);
     } 
         console.log('----------------- Temporary Directory: ----------------------------------- ', tmpDir)
-
-        const result = execSync(`python3 ${process.env.AI_ADDRESS1} ${hash}`, (error, stdout, stderr) => {
+        console.log('Home Directory: ', process.env.HOMEPATH, os.homedir(), process.env.AI_ADDRESS_2, process.env.PROJECT_PATH);
+        const result = execSync(`python ${process.env.HOMEPATH}/${process.env.PROJECT_PATH}/${process.env.AI_ADDRESS_2} ${hash}`, {timeout: 120000},(error, stdout, stderr) => {
             if (error) {
                 console.error(`exec error: ${error}`);
                 return;
@@ -44,8 +45,8 @@ app.get('/api/ai', (req, res) => {
             console.log(`stdout: ${stdout}`);
             console.error(`stderr: ${stderr}`);
         });
-        console.log(result.toString(), '--------------------------------------------------------------');
-        res.send(result.toString());
+        console.log('-----------------', result.toString(), '--------------------------------------------------------------');
+        res.json(JSON.parse(result.toString()));
     });
     
 
@@ -62,7 +63,7 @@ app.get('/api/images/:session/:file', (req, res) => {
 });
 
 // this is the endpoint that returns the dataset
-app.get('/api/dataset', (req, res) => { 
+app.get('/api/dataset', authorizeBearer, (req, res) => { 
     console.log('Request params', req.query['submit']);
     let whereClause = ''
     if(req.query['submit'] && req.query['submit'] === 'clean'){
