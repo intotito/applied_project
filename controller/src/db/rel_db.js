@@ -41,7 +41,7 @@ queueRequest = async function(path){
 getTransaction = async function(hash){
     return new Promise(async (resolve, reject) => {
         db = await initializeDatabase();
-        query = `SELECT (title, path) FROM SubPaths WHERE session_id = ${hash};`
+        query = `SELECT title, path FROM SubPaths WHERE session_id = '${hash}';`
         db.query(query, (error, result, field) => { 
             if(error){
                 console.log(error);
@@ -62,8 +62,9 @@ populateQueue = async function(hash, result){
         db = await initializeDatabase();
         query = `INSERT INTO SubPaths (session_id, title, path) VALUES `;
         console.log("Result", result)
-        for(let i = 0; i < Object.keys(result); i++){
-            query += `(${hash}, ${Object.keys(result)[i]}, ${Object.values(result)[i]})`;
+        result = JSON.parse(result);
+        for(let i = 0; i < Object.keys(result).length; i++){
+            query += `('${hash}', '${Object.keys(result)[i]}', '${Object.values(result)[i]}')`;
             query += (i != Object.keys(result).length - 1) ? ", " : ";";  
         } 
         db.query(query, (error, result, field) => {

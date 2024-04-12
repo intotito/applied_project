@@ -57,10 +57,10 @@ app.get('/api/ai', (req, res) => {
         res.json({session: hash});
 });
 
-app.get('/api/transaction/:id', (req, res) => {
+app.get('/api/transaction/:id', async (req, res) => {
     let session_id = req.params.id;
     console.log("Session_Id: ", session_id);
-    res.json(getTransaction(session_id));
+    res.json(await getTransaction(session_id));
 })
     
 
