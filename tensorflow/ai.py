@@ -139,11 +139,11 @@ def main(hash):
 
 
     result = {
-        "normal_distribution": "/" + hash + "/normal_distribution.png",
-        "correlation_matrix": "/" + hash + "/correlation_matrix.png",
-        "training_loss": "/" + hash + "/training_loss.png",
-        "actual_vs_predicted": "/" + hash + "/actual_vs_predicted.png", 
-        "actual_vs_predicted_all": "/" + hash + "/actual_vs_predicted_all.png",
+        "normal_distribution": hash + "/normal_distribution.png",
+        "correlation_matrix":  hash + "/correlation_matrix.png",
+        "training_loss": hash + "/training_loss.png",
+        "actual_vs_predicted": hash + "/actual_vs_predicted.png", 
+        "actual_vs_predicted_all": hash + "/actual_vs_predicted_all.png",
     }
     return json.dumps(result)
 
