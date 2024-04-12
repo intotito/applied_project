@@ -8,7 +8,7 @@ const {initializeDatabase, getLatestSyncDate, queue} = require('./db/rel_db');
 const {fetchData} = require('./db/firebase');
 const fs = require('fs');
 const path = require('path');
-const {execSync} = require('child_process');
+const {exec} = require('child_process');
 const os = require('os');
 
 const app = express()
@@ -37,7 +37,12 @@ app.get('/api/ai', (req, res) => {
     } 
 //    console.log('----------------- Temporary Directory: ----------------------------------- ', tmpDir)
 //    console.log('Home Directory: ', process.env.HOMEPATH, os.homedir(), process.env.AI_ADDRESS_2, process.env.PROJECT_PATH);
-    const result = exec(`python3 ${process.env.HOME}/${process.env.PROJECT_PATH}/${process.env.AI_ADDRESS_2} ${hash}`, {timeout: 120000},(error, result, stderr) => {
+    let aiModules = {
+        "test": `${process.env.HOME}/${process.env.AI_TEST_ADDRESS}$`,
+        "regression": `${process.env.HOME}/${process.env.AI_ADDRESS_1}`,
+        "neuralNetwork": `${process.env.HOME}/${process.env.PROJECT_PATH}/${process.env.AI_ADDRESS_2}`,
+    }
+    const result = exec(`python3 ${aiModules['test']} ${hash}`, {timeout: 120000},(error, result, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
             return;
