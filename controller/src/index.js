@@ -4,7 +4,7 @@ const cors = require('cors')
 const express = require('express')
 const {formatDate} = require('./utils/utils');
 const {authorizeBearer} = require('./utils/authorization');
-const {initializeDatabase, getLatestSyncDate, queue} = require('./db/rel_db');
+const {initializeDatabase, getLatestSyncDate, queue, populateQueue} = require('./db/rel_db');
 const {fetchData} = require('./db/firebase');
 const fs = require('fs');
 const path = require('path');
@@ -49,13 +49,19 @@ app.get('/api/ai', (req, res) => {
         }
         console.log(`stdout: ${result}`);
         console.error(`stderr: ${stderr}`);
-
+        populateQueue(hash, result)
     });
  //   console.log('-----------------', result.toString(), '--------------------------------------------------------------');
     //res.json(JSON.parse(result.toString()));
         queue(hash)
         res.json({session: hash});
 });
+
+app.get('/api/transaction/:id', (req, res) => {
+    let session_id = req.params.id;
+    console.log("Session_Id: ", session_id);
+    res.json(getTransaction(session_id));
+})
     
 
 app.get('/api/images/:session/:file', (req, res) => {

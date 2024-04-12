@@ -1,3 +1,4 @@
+const { populate } = require('dotenv');
 const mysql = require('mysql2');
 
 initializeDatabase = async function (){
@@ -37,6 +38,44 @@ queueRequest = async function(path){
     });
 }
 
+getTransaction = async function(hash){
+    return new Promise(async (resolve, reject) => {
+        db = await initializeDatabase();
+        query = `SELECT (title, path) FROM SubPaths WHERE session_id = ${hash};`
+        db.query(query, (error, result, field) => { 
+            if(error){
+                console.log(error);
+                reject({error: error});
+            } else {
+                let finalResult = {};
+                for(let i = 0; i < result.length; i++){
+                    finalResult[result[i].title] = result[i].path;
+                }
+                resolve(finalResult);
+            }
+        });
+    });
+}
+
+populateQueue = async function(hash, result){
+    return new Promise(async (resolve, reject) => {
+        db = await initializeDatabase();
+        query = `INSERT INTO SubPaths (session_id, title, path) VALUES `;
+        for(let i = 0; i < Object.keys(result); i++){
+            query += `(hash, ${Object.keys(result)[i]}, ${Object.values(result)[i]})`;
+            query += (i != Object.keys(result).length - 1) ? ", " : ";";  
+        } 
+        db.query(query, (error, result, field) => {
+            if(error){
+                console.log(error);
+                reject({error: error})
+            } else {
+                resolve(true);
+            }
+        })
+    })
+}
+
 getLatestSyncDate = async function (db){
     return new Promise((resolve, reject) => {
         query = `SELECT MAX(sync_date) AS latest_date FROM Syncs;`;
@@ -55,5 +94,6 @@ getLatestSyncDate = async function (db){
 module.exports = {
     initializeDatabase: initializeDatabase,
     getLatestSyncDate: getLatestSyncDate,
-    queue: queueRequest
+    queue: queueRequest, 
+    populateQueue: populateQueue
 };

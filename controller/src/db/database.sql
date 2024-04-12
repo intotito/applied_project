@@ -9,6 +9,7 @@ USE DATA_BANK;
 DROP TABLE IF EXISTS Stats;
 DROP TABLE IF EXISTS Syncs;
 DROP TABLE IF EXISTS Paths;
+DROP TABLE IF EXISTS SubPaths;
 
 CREATE TABLE Paths (
     _id INT AUTO_INCREMENT, 
@@ -19,6 +20,17 @@ CREATE TABLE Paths (
     PRIMARY KEY (_id),
     INDEX session_index(session_id)
 )Engine=InnoDB;
+
+CREATE TABLE SubPaths(
+    _id INT AUTO_INCREMENT, 
+    _date DATETIME DEFAULT CURRENT_TIMESTAMP, 
+    session_id VARCHAR(16),
+    title VARCHAR(64),
+    path VARCHAR(128),
+
+    PRIMARY KEY (_id),
+    INDEX session_id_index(session_id)
+) Engine=InnoDB;
 
 CREATE TABLE Syncs (
     _id INT AUTO_INCREMENT, 
