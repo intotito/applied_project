@@ -17,7 +17,7 @@ from sklearn.metrics import r2_score
 import tempfile
 
 hash = sys.argv[1]
-
+load_dotenv('../controller/.env')
 def main(hash):
     headers = {"Authorization": f"Bearer {os.getenv('API_SECRET_KEY')}"}
     df = pd.read_json(r'http://localhost:3000/api/dataset', storage_options=headers)
