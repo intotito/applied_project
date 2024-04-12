@@ -38,7 +38,7 @@ app.get('/api/ai', (req, res) => {
 //    console.log('----------------- Temporary Directory: ----------------------------------- ', tmpDir)
 //    console.log('Home Directory: ', process.env.HOMEPATH, os.homedir(), process.env.AI_ADDRESS_2, process.env.PROJECT_PATH);
     let aiModules = {
-        "test": `${process.env.HOME}/${process.env.AI_TEST_ADDRESS}$`,
+        "test": `${process.env.HOME}/${process.env.AI_TEST_ADDRESS}`,
         "regression": `${process.env.HOME}/${process.env.AI_ADDRESS_1}`,
         "neuralNetwork": `${process.env.HOME}/${process.env.PROJECT_PATH}/${process.env.AI_ADDRESS_2}`,
     }

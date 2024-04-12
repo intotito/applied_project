@@ -61,8 +61,9 @@ populateQueue = async function(hash, result){
     return new Promise(async (resolve, reject) => {
         db = await initializeDatabase();
         query = `INSERT INTO SubPaths (session_id, title, path) VALUES `;
+        console.log("Result", result)
         for(let i = 0; i < Object.keys(result); i++){
-            query += `(hash, ${Object.keys(result)[i]}, ${Object.values(result)[i]})`;
+            query += `(${hash}, ${Object.keys(result)[i]}, ${Object.values(result)[i]})`;
             query += (i != Object.keys(result).length - 1) ? ", " : ";";  
         } 
         db.query(query, (error, result, field) => {
