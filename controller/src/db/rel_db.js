@@ -45,7 +45,7 @@ getTransaction = async function(hash){
         db.query(query, (error, result, field) => { 
             if(error){
                 console.log(error);
-                reject({error: error});
+                reject({});
             } else {
                 let finalResult = {};
                 for(let i = 0; i < result.length; i++){

@@ -24,10 +24,11 @@ app.get('/api', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 });
 
-app.get('/api/ai', (req, res) => {
+app.get('/api/ai/:id', (req, res) => {
     // create a 6 digit hexadecimal hashcode with current timestamp
     // current epoch time in milliseconds
     
+    let id = req.params.id;
     const hash = Math.floor(new Date().getTime()).toString(16);
     var tmpDir = '';
     try{
@@ -40,9 +41,9 @@ app.get('/api/ai', (req, res) => {
     let aiModules = {
         "test": `${process.env.HOME}/${process.env.AI_TEST_ADDRESS}`,
         "regression": `${process.env.HOME}/${process.env.AI_ADDRESS_1}`,
-        "neuralNetwork": `${process.env.HOME}/${process.env.PROJECT_PATH}/${process.env.AI_ADDRESS_2}`,
+        "neurons": `${process.env.HOME}/${process.env.PROJECT_PATH}/${process.env.AI_ADDRESS_2}`,
     }
-    const result = exec(`python3 ${aiModules['test']} ${hash}`, {timeout: 120000},(error, result, stderr) => {
+    const result = exec(`python3 ${aiModules[id]} ${hash}`, {timeout: 120000},(error, result, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
             return;
