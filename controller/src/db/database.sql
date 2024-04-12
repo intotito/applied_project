@@ -16,8 +16,8 @@ CREATE TABLE Paths (
     session_id VARCHAR(16),
     status INT DEFAULT 0, 
 
+    PRIMARY KEY (_id),
     INDEX session_index(session_id)
-    PRIMARY KEY (_id)
 )Engine=InnoDB;
 
 CREATE TABLE Syncs (
