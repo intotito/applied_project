@@ -2,15 +2,17 @@
 require('dotenv').config({ path:('./../.env') })
 const cors = require('cors')
 const express = require('express')
+const {apiRoutes} = require('./routes/api');
+/*
 const {formatDate} = require('./utils/utils');
 const {authorizeBearer, createAuthority} = require('./utils/authorization');
-const {initializeDatabase, getLatestSyncDate, queue, populateQueue, getTransaction} = require('./db/rel_db');
+const {initializeDatabase, getLatestSyncDate, queue, populateQueue} = require('./db/rel_db');
 const {fetchData} = require('./db/firebase');
 const fs = require('fs');
 const path = require('path');
 const {exec} = require('child_process');
 const os = require('os');
-
+*/
 const app = express()
 const port = 3000
 // allows cross origin requests
@@ -19,6 +21,16 @@ app.use(cors());
 app.use(express.urlencoded({extended: true}));
 //app.use(authorizeBearer);
 // test endpoint
+
+app.use('/api', apiRoutes);
+
+
+
+// starts the server at port 3000
+app.listen(port, () => {
+    console.log(`Controller Running at port: ${port}`)
+  })
+/*
 app.get('/api', (req, res) => {
     console.log(process.env)
   res.send('<h1>Hello World!</h1>')
@@ -137,10 +149,7 @@ app.post('/api/authorize', authorizeBearer, (req, res) => {
 
 
 
-// starts the server at port 3000
-app.listen(port, () => {
-  console.log(`Controller Running at port: ${port}`)
-})
+
 
 // this function resets the database
 resetDatabase = async function (){
@@ -231,3 +240,4 @@ async function syncDatabase(userId){
         }
     });
 }
+*/

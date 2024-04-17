@@ -1,5 +1,7 @@
-const { populate } = require('dotenv');
 const mysql = require('mysql2');
+const {fetchData} = require('./firebase');
+const {formatDate} = require('.././utils/utils');
+const fs = require('fs');
 
 initializeDatabase = async function (){
     const rel_db = mysql.createConnection({
@@ -93,10 +95,103 @@ getLatestSyncDate = async function (db){
     });
 }
 
+// this function gets the dataset from the database
+getDataSet = async function(whereClause){
+    return new Promise(async (resolve, reject) => {
+        const mysql_db = await initializeDatabase();
+        const query = `SELECT * FROM Stats ${whereClause};`
+        mysql_db.query(query, (error, result, field) => {
+            if(error){
+                console.log(error)
+                reject(error);
+            } else {
+                resolve(result);
+                mysql_db.end((err) => {
+                    if(err){
+                        console.log(err);
+                    }
+                })
+                console.log("fields", field);
+            }
+        });
+    });
+}
+
+// this function syncs the relational database with the firebase database
+syncDatabase = async function (userId){
+    const db = await initializeDatabase();
+    var last = await getLatestSyncDate(db);
+    const data = await fetchData(last);
+    let query = "INSERT INTO Stats(_date, _user, fm_avg_trk_time, fm_accuracy, " +
+                "vx_avg_res_time, vx_shot_accuracy, vx_trg_accuracy, au_avg_res_time, bm_HR_max, " +
+                "bm_HR_avg, bm_HR_var, bm_act_steps, bm_sleep) VALUES";
+    for(let i = 0; i < data.length; i++){
+        if(data[i]._date && data[i]._date > last){
+            last = data[i]._date;
+        }
+        if(data[i]._date){
+            query += `('${formatDate(data[i]._date)}', '${data[i]._user}', ${data[i].fm_avg_trk_time},` +
+                    `${data[i].fm_accuracy}, ${data[i].vx_avg_res_time}, ${data[i].vx_shot_accuracy} ,` +
+                    `${data[i].vx_trg_accuracy}, ${data[i].au_avg_res_time}, ${data[i].bm_HR_max}, ` +
+                    `${data[i].bm_HR_avg || null}, ${data[i].bm_HR_var || null}, ${data[i].bm_act_steps || null}, ${data[i].bm_sleep || null})`;
+            
+            if(i != data.length - 1){
+                query += ", "
+            }
+        }
+    }
+    query += ";"  
+    let query1 = `INSERT INTO Syncs (user_id, class_id, sync_date) VALUES ('${userId}', 0, '${formatDate(last.toDateString())}');`;
+    db.query(query, ((error, results, field) => {
+        console.log("Query Result", results, 'Error:', error);
+    }));
+    db.query(query1, ((error, results, field) => {
+        console.log("Query Result1", results, 'Error:', error);
+    }));
+
+    db.end((err) => {
+        if(err){
+            console.log(err);
+        }
+    });
+}
+
+// this function resets the database
+resetDatabase = async function (){
+    return new Promise(async (resolve, reject) => {
+        const db = await initializeDatabase();
+        const filePath = './db/database.sql';
+        const queries = fs.readFileSync(filePath).toString().split(';');
+        // print out the queries
+        for(let i = 0; i < queries.length; i++){
+            let query = queries[i].trim();
+            // ignore if string starts with '#'
+            if(query.startsWith('#') || query.length == 0){
+                continue;
+            }
+            db.query(query, (error, result, field) => {
+                if(error){
+                    console.log(error);
+                    reject(error);
+                }
+            });
+        }
+        db.end((err) => {
+            if(err){
+                console.log(err);
+            }
+        });
+        resolve("Database Reset");
+    })
+};
+
 module.exports = {
     initializeDatabase: initializeDatabase,
     getLatestSyncDate: getLatestSyncDate,
     queue: queueRequest, 
     populateQueue: populateQueue,
-    getTransaction: getTransaction
+    getTransaction: getTransaction,
+    syncDatabase: syncDatabase,
+    getDataSet: getDataSet, 
+    resetDatabase: resetDatabase
 };
