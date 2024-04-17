@@ -1,9 +1,94 @@
 \chapter{System Design}
-Provide a detailed explanation of the overall system architecture %\cite{lin1991divergence}, i.e. the HOW of the project.
-Use UML, system architecture diagrams, screenshots, code snippets and algorithms to illustrate your design.
 
-This chapter presents the overall system design and architecture of the project. The chapter is divided into two major sections, 
-the first describes the relevant parts of the inherited infrastructure and the second section describes the new system architecture. 
+This chapter presents the overall architecture and design of the system. This chapter introduces and explains the various design 
+paradigms used for the development and deployment of various components that interact together to provide the functionalities of the system. 
+
+The system architecture calls for a relational database to store aggregated users test and biometric data, a RESTful API to provide secured 
+and customized access to user data in the database, and a web application to provide a user interface for administrative access to the 
+system. Machine learning services were developed and deployed to provide real-time machine learning data analysis and best model selection 
+algorithms.
+
+\section{System Architecture}
+
+The Overall system was designed for a public cloud deployment while the core functionalities of the system was modeled using the
+Model-View-Controller (MVC) Software Architectural Pattern. Thus, the system was divided into three major components: the Model, comprising 
+of the databases and the machine learning models; the View, implemented with Dashboard web application; and the Controller, implemented with 
+the Controller web application. Each of these components were developed and deployed as separate services. 
+\begin{figure}[h!]
+    \includegraphics[width=0.9\textwidth]{images/sys_architecture.png}
+    \caption{System Architecture.}
+    \label{image:sys_architecture}
+\end{figure}
+
+
+\section{Routing \& Security}
+Communication between various components was modeled with the client-server paradigm utilizing REST API over HTTP. Communication may be initiated
+by a client and information exchanged with a server using a request-response messaging pattern.  
+Security was provided to secure access to the system and data. At the network level, the TSL/SSL security layer was added to the domain name to 
+provide end-to-end encryption between the user and the web application. At the application api level, the Bearer Authentication Token was used to 
+secure access to the REST API. Figure~\ref{image:comm_sec} shows a detailed address resolution, traffic routing, security validation and 
+request-response path between a client and the web application. 
+
+\begin{figure}[h!]
+    \includegraphics[width=0.9\textwidth]{images/comm_sec.png}
+    \caption{Communication \& Security.}
+    \label{image:comm_sec}
+\end{figure}
+
+\subsection{REST API}
+The Representational State Transfer (REST) API standard was used to provide a stateless communication between various components of the system. 
+The JSON data format was used to represent the data exchanged between the components. 
+
+\subsection{Security}
+The AWS Certificate Manager was used to provide the TSL/SSL security layer to the domain name, and handles all the complexity involved in 
+key management and certificate provisioning \cite{aws_acm}. Incoming request is routed to the LoadBalancer which was configured to re-route all incoming traffic 
+to a registered target which is the EC2 instance over a port. The TSL/SSL security layer was attached to the LoadBalancer as a security policy 
+to provide end-to-end encryption. The value for the domain name $A$ and $AAAA$ records were set to the LoadBalancer DNS name, while the value 
+for the domain name $CNAME$ record was set to that the certificate provided by the AWS Certificate Manager.
+
+The various components interact together to provide the system functionalities and were developed and deployed in a loosely coupled manner and
+interact with each other through well defined RESTful API calls.  The Amazon Web Services (AWS) cloud platform was utilized as a Infrastructure
+as a Service (IaaS) to provide the compute and storage resources required to run the various components with the EC2 Micro Virtual Machine, 
+domain name service was provided using Amazon Route 53 (Domain Naming Service) and Amazon Certificate Manager for TSL/SSL security. Relational 
+Database was provided as a microservice using the Amazon Relational Database Service (MySQL)
+
+
+
+
+
+\subsection{Web Services}
+
+
+\subsubsection*{Domain Name} A domain name was registered on Route 53 and linked to the Elastic Load Balancer (ELB) to provide a consistent means of 
+accessing the web application. IP addresses assigned to an instance of the EC2 Micro Virtual Machine are not static and will change each time the 
+instance is restarted, this is guaranteed to break connection to the PolarFlow REST API and will require frequent modification of configuration files. 
+Hence, request to the domain name is redirected to the ELB which in turn routes the request to the EC2 instance. A SSL/TLS security layer was added to 
+the domain name to provide secure communication between the user and the web application as part of the requirements for the project. 
+
+\subsubsection*{Controller} The Controller
+\subsection{Database Design}
+
+\begin{figure}[h!]
+    \includegraphics[width=0.9\textwidth]{images/db_schema.png}
+    \caption{Database Design.}
+    \label{image:databaseDesign}
+\end{figure}
+
+\begin{figure}[h!]
+    \includegraphics[width=0.9\textwidth]{images/mvc_arch.png}
+    \caption{MVC Architecture.}
+    \label{image:mvc_arch}
+\end{figure}
+
+\begin{figure}[h!]
+    \includegraphics[width=1.0\textwidth]{images/seq_diagram.png}
+    \caption{Sequence Diagram}
+    \label{image:seq_diagram}
+\end{figure}
+
+The machine learning services were developed using the 
+sklearn library, Keras TensorFlow library and Flask web framework. The services were deployed on a cloud server to provide real-time best
+model selection for users' performance prediction.
 
 \section{Inherited Infrastructure}
 
@@ -20,55 +105,3 @@ access the API and retrieve relevant biometric data from the smartwatch. The dat
 User authentication endpoint for Auth2.0 flow required for enrolling volunteers into the system was also inherited from the previous project. 
 The endpoint was developed using Express.js and Embedded Javascript (EJS) technologies. The endpoint provides a secure way to authenticate
 users on the Polar Flow API to grant access to the users' biometric data. 
-
-
-\section{System Architecture}
-
-The Overall system architecture was designed for a public cloud deployment while the core functionalities of the system was modeled using the
-Model-View-Controller (MVC) software architectural pattern. 
-Hence, the system was divided into three major components: the Model, comprising 
-of the databases and the machine learning models; the View, implemented with Dashboard web application; and the Controller, implemented with 
-the Controller web application. 
-
-
-The system architecture calls for a relational database to store aggregated users test and biometric data, a RESTful API to provide secured 
-and customized access to user data in the database, and a web application to provide a user interface for administrative access to the 
-system. A machine learning services were developed and deployed to provide real-time model data analysis and best model selection algorithms  
-to ascertain and predict users' likely performance given their biometric data.
-The system was deployed using the Amazon Web Services (AWS) cloud platform. The system architecture is shown in Figure \ref{image:sys_architecture}.
-Components with broken line border were inherited from the previous project while components with solid line border were developed for this project. 
-\begin{figure}[h!]
-    \includegraphics[width=0.9\textwidth]{images/sys_architecture.png}
-    \caption{System Architecture.}
-    \label{image:sys_architecture}
-\end{figure}
-
-
-\subsection{Web Services}
-The various components that interact together to provide the system functionalities were developed and deployed in a loosely coupled manner and
-interact with each other through RESTful API calls.  The Amazon Web Services (AWS) cloud platform was utilized as a Infrastructure as a Service (IaaS)
-to provide the compute and storage resources required to run the various components with the EC2 Micro Virtual Machine, RDS (MySQL), 
-Route 53 (Domain Naming Service), Elastic Load Balancer (ELB) and Software as a Service (Saas) for data storage with
-Relational Database Service (RDS).
-
-\subsubsection*{Domain Name} A domain name was registered on Route 53 and linked to the Elastic Load Balancer (ELB) to provide a consistent means of 
-accessing the web application. IP addresses assigned to an instance of the EC2 Micro Virtual Machine are not static and will change each time the 
-instance is restarted, this is guaranteed to break connection to the PolarFlow REST API and will require frequent modification of configuration files. 
-Hence, request to the domain name is redirected to the ELB which in turn routes the request to the EC2 instance. A SSL/TLS security layer was added to 
-the domain name to provide secure communication between the user and the web application as part of the requirements for the project. 
-
-\subsubsection*{Controller} The Controller
-\subsection{Database Design}
-\begin{figure}[h!]
-    \includegraphics[width=0.9\textwidth]{images/db_schema.png}
-    \caption{Database Design.}
-    \label{image:databaseDesign}
-\end{figure}
-
-
-The machine learning services were developed using the 
-sklearn library, Keras TensorFlow library and Flask web framework. The services were deployed on a cloud server to provide real-time best
-model selection for users' performance prediction.
-
-%Image \ref{image:sysArchitecture} can be referenced with the label given to the image, \\ i.e. \textbf{\textbackslash{}ref\{image:sysArchitecture\}}. 
-Note that \LaTeX will place the image wherever it deems fit. Don't bother trying to change where a table or figure is placed until your document is ready for final layout.

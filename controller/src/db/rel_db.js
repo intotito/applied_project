@@ -97,5 +97,6 @@ module.exports = {
     initializeDatabase: initializeDatabase,
     getLatestSyncDate: getLatestSyncDate,
     queue: queueRequest, 
-    populateQueue: populateQueue
+    populateQueue: populateQueue,
+    getTransaction: getTransaction
 };

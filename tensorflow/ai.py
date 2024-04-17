@@ -137,6 +137,7 @@ def main(hash):
     plt.savefig(tempfile.gettempdir() + "/" + hash + "/actual_vs_predicted_all.png")
     plt.close()
 
+    
 
     result = {
         "normal_distribution": hash + "/normal_distribution.png",

@@ -3,8 +3,8 @@ require('dotenv').config({ path:('./../.env') })
 const cors = require('cors')
 const express = require('express')
 const {formatDate} = require('./utils/utils');
-const {authorizeBearer} = require('./utils/authorization');
-const {initializeDatabase, getLatestSyncDate, queue, populateQueue} = require('./db/rel_db');
+const {authorizeBearer, createAuthority} = require('./utils/authorization');
+const {initializeDatabase, getLatestSyncDate, queue, populateQueue, getTransaction} = require('./db/rel_db');
 const {fetchData} = require('./db/firebase');
 const fs = require('fs');
 const path = require('path');
@@ -120,6 +120,20 @@ app.get('/api/reset', authorizeBearer, (req, res) => {
         console.log(error)
     })
 })
+// require {userName: 'username', secret: 'secret-key'}
+app.post('/api/authorize', authorizeBearer, (req, res) => {
+    console.log('Request Body', req.body);
+    if(!req.body.userName || !req.body.secret || req.body.secret != process.env.API_JWT_KEY){
+        res.status(400).send('<h1>Invalid Request</h1>');
+    }
+    createAuthority(req.body.userName).then((value) => {
+        res.json(value);
+    }).catch(error => {
+        res.status(505).send('<h1>Authorization failed</h1>')
+        console.log(error)
+    });
+})
+
 
 
 
