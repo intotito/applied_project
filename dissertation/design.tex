@@ -8,18 +8,30 @@ and customized access to user data in the database, and a web application to pro
 system. Machine learning services were developed and deployed to provide real-time machine learning data analysis and best model selection 
 algorithms.
 
-\section{System Architecture}
+The various components interact together to provide the system functionalities and were developed and deployed in a loosely coupled manner and
+interact with each other through well defined RESTful API calls.  The Amazon Web Services (AWS) cloud platform was utilized as a Infrastructure
+as a Service (IaaS) to provide the compute and storage resources required to run the various components with the EC2 Micro Virtual Machine, 
+domain name service was provided using Amazon Route 53 (Domain Naming Service) and Amazon Certificate Manager for TSL/SSL security. Relational 
+Database was provided as a microservice using the Amazon Relational Database Service (MySQL)
 
-The Overall system was designed for a public cloud deployment while the core functionalities of the system was modeled using the
-Model-View-Controller (MVC) Software Architectural Pattern. Thus, the system was divided into three major components: the Model, comprising 
-of the databases and the machine learning models; the View, implemented with Dashboard web application; and the Controller, implemented with 
-the Controller web application. Each of these components were developed and deployed as separate services. 
 \begin{figure}[h!]
     \includegraphics[width=0.9\textwidth]{images/sys_architecture.png}
     \caption{System Architecture.}
     \label{image:sys_architecture}
 \end{figure}
 
+\section{System Architecture}
+
+The Overall system was designed for a public cloud deployment while the core functionalities of the system was modeled using the
+Model-View-Controller (MVC) Software Architectural Pattern. Thus, the system was divided into three major components: the Model, comprising 
+of the databases and the machine learning models; the View, implemented with Dashboard web application; and the Controller, implemented with 
+the Controller web application. Each of these components were developed and deployed as separate services. 
+
+\begin{figure}[h!]
+    \includegraphics[width=0.9\textwidth]{images/mvc_arch.png}
+    \caption{MVC Architecture.}
+    \label{image:mvc_arch}
+\end{figure}
 
 \section{Routing \& Security}
 Communication between various components was modeled with the client-server paradigm utilizing REST API over HTTP. Communication may be initiated
@@ -35,38 +47,74 @@ request-response path between a client and the web application.
     \label{image:comm_sec}
 \end{figure}
 
+\subsubsection*{Domain Name} A domain name was registered on Route 53 and linked to the Elastic Load Balancer (ELB) to provide a consistent means of 
+accessing the web application. Assigned IP addresses to an instance of the EC2 Micro Virtual Machine are not static and will change each time the 
+instance is restarted, this is guaranteed to break connection to the application. Situations like this are undesirable, and requires frequent 
+modification of configuration files every time the IP address changes. Figure~\ref{image:dns_record} shows the domain name configuration on Route 53.
+
+\begin{figure}[h!]
+    \begin{center}
+        \includegraphics[width=0.9\textwidth]{images/dns_record.png}
+        \caption{DNS Records}
+        \label{image:dns_record}
+    \end{center}
+\end{figure}
+
 \subsection{REST API}
 The Representational State Transfer (REST) API standard was used to provide a stateless communication between various components of the system. 
-The JSON data format was used to represent the data exchanged between the components. 
+The JSON data format was used to represent the data exchanged between the components. Functionalities of the web application is accessed using a 
+client browser and thus requires a front end application to interact with the user. The front end application referred to as the Dashboard was
+designed and deployed as a stand alone application and requires data from the Models to perform its functionalities. A REST API was designed and 
+developed to provide customized access to the data in the Models. 
+Figure~\ref{image:seq_diagram} shows the sequence of interactions to access the different endpoints of the REST API. 
+
+\begin{figure}[h!]
+    \includegraphics[width=1.0\textwidth]{images/seq_diagram.png}
+    \caption{Sequence Diagram}
+    \label{image:seq_diagram}
+\end{figure}
+
 
 \subsection{Security}
 The AWS Certificate Manager was used to provide the TSL/SSL security layer to the domain name, and handles all the complexity involved in 
 key management and certificate provisioning \cite{aws_acm}. Incoming request is routed to the LoadBalancer which was configured to re-route all incoming traffic 
-to a registered target which is the EC2 instance over a port. The TSL/SSL security layer was attached to the LoadBalancer as a security policy 
+to a registered target which is the EC2 Virtual Machine instance. The TSL/SSL security layer was attached to the LoadBalancer as a security policy 
 to provide end-to-end encryption. The value for the domain name $A$ and $AAAA$ records were set to the LoadBalancer DNS name, while the value 
-for the domain name $CNAME$ record was set to that the certificate provided by the AWS Certificate Manager.
+for the domain name $CNAME$ record was set to that the certificate provided by the AWS Certificate Manager. 
+Figure~\ref{image:ssl_record} shows the TSL/SSL record configuration on Certificate Manager. 
 
-The various components interact together to provide the system functionalities and were developed and deployed in a loosely coupled manner and
-interact with each other through well defined RESTful API calls.  The Amazon Web Services (AWS) cloud platform was utilized as a Infrastructure
-as a Service (IaaS) to provide the compute and storage resources required to run the various components with the EC2 Micro Virtual Machine, 
-domain name service was provided using Amazon Route 53 (Domain Naming Service) and Amazon Certificate Manager for TSL/SSL security. Relational 
-Database was provided as a microservice using the Amazon Relational Database Service (MySQL)
+\begin{figure}[h!]
+    \begin{center}
+        \includegraphics[width=0.9\textwidth]{images/ssl_record.png}
+        \caption{TSL/SSL Record}
+        \label{image:ssl_record}
+    \end{center}
+\end{figure}
+
+The Bearer Authentication Token was used to further secure access to specific endpoints of the REST API. Consumers of the API are required to 
+provide a valid token as a header in a request to successfully access the API. Generating a token involves digitally signing user information 
+comprising of the header, payload and signature; using a secret key only known to the server. Decoding the token involves verifying the signature 
+using the secret key to ensure the token is valid, then user information is extracted from the payload. Figure~\ref{image:jwt} illustrates the 
+process of signing and verifying a JWT. 
+
+\begin{figure}[h!]
+    \begin{center}
+        \includegraphics[height=0.4\textwidth]{images/jwt.png}
+        \caption{JWT Token}
+        \label{image:jwt}
+    \end{center}
+\end{figure}
 
 
+\section{Controller}
+In a Model-View-Controller (MVC) architectural pattern, the Controller is at the center of the system's process flow and is responsible for 
+handling user requests and producing an appropriate response to requests. The Controller was developed as a standalone web application
+listening on port 3000 and is capable of servicing multiple requests concurrently and referentially coupled with the Model. The Controller
+provides an interface for users to interact with the Models using RESTful API calls. 
 
+\section{View}
 
-
-\subsection{Web Services}
-
-
-\subsubsection*{Domain Name} A domain name was registered on Route 53 and linked to the Elastic Load Balancer (ELB) to provide a consistent means of 
-accessing the web application. IP addresses assigned to an instance of the EC2 Micro Virtual Machine are not static and will change each time the 
-instance is restarted, this is guaranteed to break connection to the PolarFlow REST API and will require frequent modification of configuration files. 
-Hence, request to the domain name is redirected to the ELB which in turn routes the request to the EC2 instance. A SSL/TLS security layer was added to 
-the domain name to provide secure communication between the user and the web application as part of the requirements for the project. 
-
-\subsubsection*{Controller} The Controller
-\subsection{Database Design}
+\section{Model}
 
 \begin{figure}[h!]
     \includegraphics[width=0.9\textwidth]{images/db_schema.png}
@@ -74,17 +122,6 @@ the domain name to provide secure communication between the user and the web app
     \label{image:databaseDesign}
 \end{figure}
 
-\begin{figure}[h!]
-    \includegraphics[width=0.9\textwidth]{images/mvc_arch.png}
-    \caption{MVC Architecture.}
-    \label{image:mvc_arch}
-\end{figure}
-
-\begin{figure}[h!]
-    \includegraphics[width=1.0\textwidth]{images/seq_diagram.png}
-    \caption{Sequence Diagram}
-    \label{image:seq_diagram}
-\end{figure}
 
 The machine learning services were developed using the 
 sklearn library, Keras TensorFlow library and Flask web framework. The services were deployed on a cloud server to provide real-time best
