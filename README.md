@@ -32,6 +32,14 @@ The diagram below shows a summary of the system architecture.
 ## Screenshot
 ![Screenshot](dissertation/images/dashboard.png)
 
+## Screencast
+`dissertation/videos/screencast.mp4`
+
+<video width="320" height="240" controls>
+  <source src="./dissertation/videos/screencast.mp4" type="video/mp4">
+  
+</video>
+
 
 ## Controller Source Code
 `./controller/src`
