@@ -1,125 +1,164 @@
 \chapter{Introduction}
 
-\textbf{F}irst person shooter games represents the class of games where the  player views the environment through a viewport
-    and can perform such actions as looking around, moving around, aiming and firing of weapons. these actions are accomplished
-    using various button or combination of button.
+\textbf{F}irst-person shooter games represent the class of games where the player views the environment through a viewport
+and can perform such actions as looking around, moving around, aiming, and firing of weapons. these actions are accomplished
+using various buttons or combinations of buttons.
 
-    During a typical gameplay, players are confronted with other opposing players and are required to eliminate their opponents 
-    using various weapons available while evading enemy fire. To successfully compete in such a scenario, players are expected to 
-    react fast, effectively track targets, accurately hit targets, perceive sound and accurately map them to a location within 
-    their environ.
-    
-    The primary objective of this research work is to formulate a metrics that can accurately measure users performance in the 
-    such scenario and compare their performance with their fitness data with the aim of finding a correlation between 
-    performance and physiological state.
-    
-    \section{Background}
-    PUBG: Battlegrounds (previously known as PlayerUnknown\'s Backgrounds) is a battle royale style player versus
-    player (PvP) shooter game developed by PUBG Studio. Players face-off with each other using various types of battlefield weapons
-    in a last man standing deathmatch and the last person to remain alive wins. The game is available in all major platforms
-    and as of March 2021, the mobile version of the game has accumulated more than a billion download outside of China with 
-    revenue of over \$9billion while the PC and console versions have accumulated a total revenue of \$4billion
-    \cite{statista}.
-    \par 
-    Since its first release in 2017, the game has since become one the fans favorite and has over `350,000' peak concurrent 
-    monthly users~\footnote{statista}. As a multiple award-winning game with proven longevity records and a large community.
-    Interest in the game cut across diferent demography and is equally far-reaching across the globe. 
-    The game playing scenario requires players to face-off with other players and there is where some skills like 
-    `eye-hand-coordination', `ear-hand-coordination', `fine-motor' skills, etc\.. are required to compete favorably against 
-    other players. Players have access to a varieties of weapons with different capabilities and can make in-game adjustments
-    to their control to suite their various preferences.
+During a typical gameplay, players are confronted with other opposing players and are required to eliminate their opponents
+using various weapons available while evading enemy fire. To successfully compete in such a scenario, players are expected to
+react fast, effectively track targets, accurately hit targets, perceive sound, and accurately map them to a location within
+their environ.
 
-    This project is a continuation of research work previously done by Fourth Year Software Design Students titled `Biometric 
-    Data Collection for Performance Optimization in a Digital Game Scenario' in collaboration with the Department of Sports
-     \& Excercise Science, Atlantic Technological University.
-    The originiating project titled \textbf{`Biometric Data Collection for Performance Optimization in a Digital
-    Game Scenario'}, posed the question `can a player\'s biometric data be used to optimize their performance in a 
-    first-person shooter game'? And a subsequent follow up project which sought to create a Chart API capable of displaying 
-    all relevant information previously displayed on different pages on a single page.\\
-    The former research was geared towards creating a platform for collecting performance data in a similar scenarios 
-    (Weapons, controls, user perspective, ect\..) obtainable in PUBG\::Battlegrounds in the form of a Unity Desktop 
-    {\tt Application}. Collection and storage of Biometric data from an 
-    {\tt Activity Monitor} in the form of a {\tt Smart Watch}. With the eventual goal of finding correlation between their
-    performance and their Biometric data. 
+The goal of this research work is to collect biometric data from users using a Wearable Smart Watch (Polar Vantage V2)
+and performance data using a Test Game designed in a first-person-shooter scenario for this purpose. This involved building
+the required infrastructure to reliably collect and store users' data from the various sources. Finally, the data collected will be
+analyzed using classical machine learning algorithms and automatic neural network to ascertain if a correlation exists between
+users' performance in a digital game scenario and their biometric data.
 
 
-    \section{Performance Metrics}
-    For the purpose of measuring users performance in in a first-person shooter game scenario, three categories of metrics where
-    developed to measure users performance. They are listed as follows: Fine-Motor Control, Visual metrics and Audio metrics. 
-    \subsection{Fine Motor Control}  Fine motor refers to the controlled and coordinated incremental movements made by the hand
-    when handling items. This metrics assesses how quickly users are able to adjust their aim to targets appearing on the screen.
-    Two take away from this classification is the Response Time (seconds) which quantifies reaction time and Accuracy (\%) which 
-    quantifies users fine adjustment capabilities. 
-    \subsection{Visual Reflexes} The game scenario under study for most of the time involves users having multiple legitimate targets
-    to shoot, and having to engage them simultaneously. This metrics accesses users visual reflexes by considering the Target 
-    Accuracy which is the measure of the number of successful targets hit with the total number of target spawned expressed in 
-    percentage. Shot Accuracy which is the measure of the number of successful shots to the number of targets hit. Finally the 
-    Average Response Time which is the average time it takes for a target to appear before being hit.
-    \subsection{Audio Reflexes} User audio reflexes are accessed using the Response Time, which measures the time it takes to 
-    identify the source of a sound within the users environment
-    
-    \section{Biometric Data} 
-    The collection and analysis of biometric data play a significant role in understanding the relationship between physical fitness and 
-    gaming performance. This research aims to investigate how various physical parameters, such as HRV (Heart Rate Variability), Heart 
-    Rate Max, Heart Rate average, Active Sleep and Quality of Sleep, influence a user's performance in a digital game, in this case 
-    PUBG: Battlegrounds. The  research will also explore the potential of using biometric data to suggest the most suitable settings for
-    different game scenarios. By using wearable technology, which can monitor metrics such as heart rate, sleep, and activity, this study
-    seeks to establish a correlation between the player's physical condition and their performance in a digital game scenario. The 
-    importance of fitness data in this context cannot be overstated. Heart Rate Variability (HRV), maximum heart rate, active sleep, and 
-    sleep quality are all essential indicators of a person's physical condition. THese metrics offers a comprehensive insight into the 
-    user's physical condition, which can be used to improve their gaming performance. 
+\section{Background}
+PUBG: Battlegrounds (previously known as PlayerUnknown\'s Backgrounds) is a battle royale style player versus
+player (PvP) shooter game developed by PUBG Studio. Players face-off with each other using various types of battlefield weapons
+in a last-man-standing deathmatch and the last person to remain alive wins. The game is available on all major platforms
+and as of March 2021, the mobile version of the game has accumulated more than a billion download outside of China with
+revenue of over \$9billion while the PC and console versions have accumulated a total revenue of \$4billion
+\cite{statista}.
+\par
+Since its first release in 2017, the game has since become one of the fans favourite and has over `350,000' peak concurrent
+monthly users~\footnote{statista}. As a multiple award-winning game with proven longevity records and a large community.
+Interest in the game cuts across different demography and is equally far-reaching across the globe.
+The game-playing scenario requires players to face off with other players and there is where some skills like
+`eye-hand-coordination', `ear-hand-coordination', `fine-motor' skills, etc\.. are required to compete favourably against
+other players. Players have access to a variety of weapons with different capabilities and can make in-game adjustments
+to their control to suit their various preferences.
 
-    \subsection{Heart Rate Variability (HRV):} is a measure of the variation in time between each heartbeat, and it is closely linked to 
-    the body's stress levels. HRV is widely used as a measure of the body's autonomic nervous system, which controls the body's stress 
-    response. A higher HRV is associated with a lower stress level, while a lower HRV is associated with a higher stress level. A research
-    from E. Ortega\cite{ortega2018pre} highlights the importance of HRV in sports science, as a way of understanding the psychological
-    state of atheletes before competions. It found a positive correlation between HRV, self-efficacy, and performance among sport shooters.
-    Advanced shooters demonstrated lower average heart rates and employed mental skills more effectively than less experienced shooters.
-    This suggests HRV as a valuable asset, when tranferring the psychological state of the athlete to the performance in a digital game. 
-    It allows for a better understanding of the player's stress levels, and how it affects their performance. This personalized approach 
-    can enhance player experience, and potentially improve their performance in the game. 
-    
-    The Heart Rate Variability measurements typically requires a chest strap, and measurements typically span from 5 minutes to 24 hours, 
-    it is commonly used in clinical settings to evaluate cardiac conditions.\cite{malik1996heart} Short-term HRV analysis lasting less then 
-    5 minutes have been proven to provide more accurate estimations compared to longer measurements.\cite{mcnames2006reliability}
-    Based on this, the research will focus on short-term HRV measurements, as it is more practical for the user, and it provides accurate 
-    estimations. It will be more detailed in the methodology section.
+This project is a continuation of research work previously done by Fourth Year Software Design Students titled `Biometric
+Data Collection for Performance Optimization in a Digital Game Scenario' in collaboration with the Department of Sports
+\& Exercise Science, Atlantic Technological University.
+The originating project titled \textbf{`Biometric Data Collection for Performance Optimization in a Digital 
+Game Scenario'}. A desktop application Test Game designed with Unity 3D Framework and a Firestore database
+that stores all user data were part of the infrastructure inherited from the previous project.
 
-    \textbf{Heart Rate Max:} is the maximum number of times the heart can beat in a minute, and it is a measure of the body's 
-    cardiovascular fitness. It is an important indicator of the body's physical condition, and it is used to evaluate the body's ability 
-    to perform physical activities, reflecting their cardiovascular fitness. In this research, understanding HRmax is vital for assessing 
-    participants fitness and endurance. It could indicates how well players can handle stress and maintain their concentration over 
-    extended periods of time. By analysing alongside other biometric data this research could uncover valuable insight into optmizing 
-    players performance in a digital game scenario.
+\section{Objectives}
+This project aims to develop a robust and enduring system that can analyze users' data on the fly using a predefined machine learning
+algorithm. The system is expected to function well beyond the scope of this research and is expected to build better models as more data
+is collected. The data collection effort involved enrolling volunteers to gather biometric and test data. Each volunteers were given
+a Polar Vantage V2 Smart Watch and a Test Game which they were expected to play daily.
 
-    \textbf{Heart Rate Average:} is the average number of times the heart beats in a minute, and it is a measure of the body's physical 
-    activity. It is also an important indicator of the body's physical condition,     and it is another measure of the body's 
-    cardiovascular fitness. It is used to evaluate the body's ability to perform physical activities, reflecting their cardiovascular 
-    fitness.
+\subsection{Volunteer Recruitment}
+Volunteers were sought to aid the data collection effort. At the onset of the project, a total of 10 volunteers were expected to be recruited
+to meet the target of 1000 data points set out as the goal to build a machine learning model. The recruitment process involved getting
+ethics approval from the institution and the volunteers were expected to sign a consent form before participating in the research. 
+Flyer posters were designed and distributed across the campus to attract potential volunteers. A total of 5 volunteers were eventually 
+recruited and participated in the research. 
 
-    \textbf{Active Step:} Active steps, as a mesure of physical activity, is an important indicator of the body's physical condition. It is 
-    used to evaluate the body's ability to perform physical activities, reflecting their cardiovascular fitness. Counting the numbers of 
-    steps taken daily can help track overall physical activity, and it is a good indicator of the body physical condition. It is also used 
-    to evaluate the body's ability to perform physical activities, reflecting their cardiovascular fitness.
-    
+\subsection{Feature Selection}
+The features selected for this research were based on the availability of data from the wearable device and the relevance of the
+features to the research. The features were divided into two categories: Independent and Dependent variables. The independent
+variables are the biometric data collected from the wearable device, while the dependent variables are the performance metrics
 
-    \textbf{Quality of Sleep:} are important indicators of the body's recovery and readiness for physical activity. Active sleep is a 
-    measure of the body's physical activity during sleep, and it is an important indicator of the body's recovery and readiness for 
-    physical activity.High-quality sleep, marked by sufficient duration and minimal disruptions, is fundamental for overall health 
-    impacting mood, cognitive function.  A research that evaluated Sleep and performance in Eathletes \cite{BONNAR2019647} uderscores the 
-    critical role of sleep in Eathletes performance in Esports, showing its impact on cognitive functions as a crucial factor for 
-    competitives success. Adequate sleep improves information processing, visual motor functioning, attention, working memory, and other 
-    functions essential for decision-making and reaction time. On the other hand, sleep depravation can significantly impair these 
-    cognitive abilities, potentially to poor performance. For this research it proves the importance of sleep in the context of gaming 
-    performance, and how it can be used to predict the player's readiness and tune their performance in a digital game scenario.
 
-    \section{Classification Model}
-    \section{Regression Model}
+\subsubsection{Performance Metrics (Dependent Variables)}
+For the purpose of measuring users' performance in in a first-person shooter game scenario, three categories of metrics were
+developed to measure users' performance. They are listed as follows: Fine-Motor Control, Visual metrics, and Audio metrics.
 
-    
-    
-    
+\textbf{Fine Motor Control} Fine motor refers to the controlled and coordinated incremental movements made by the hand
+when handling items. This metric assesses how quickly users are able to adjust their aim to targets appearing on the screen.
+Two take away from this classification are the Response Time (seconds) which quantifies reaction time and Accuracy (\%) which
+quantifies users' fine adjustment capabilities.
 
-    
+\textbf{Visual Reflexes} The game scenario under study for most of the time involves users having multiple legitimate targets
+to shoot, and having to engage them simultaneously. This metric accesses users' visual reflexes by considering the Target
+Accuracy which is the measure of the number of successful targets hit with the total number of targets spawned expressed in
+percentage. Shot Accuracy which is the measure of the number of successful shots to the number of targets hit. Finally, the
+Average Response Time which is the average time it takes for a target to appear before being hit.
 
-    
+\textbf{Audio Reflexes} User audio reflexes are accessed using the Response Time, which measures the time it takes to
+identify the source of a sound within the user's environment.
+
+\subsubsection{Biometric Data (Independent Variables)}
+The collection and analysis of biometric data play a significant role in understanding the relationship between physical fitness and
+gaming performance. This research aims to investigate how various physical parameters, such as HRV (Heart Rate Variability), Heart
+Rate Max, Heart Rate average, Active Sleep and Quality of Sleep, influence a user's performance in a digital game, in this case
+PUBG: Battlegrounds. The research will also explore the potential of using biometric data to suggest the most suitable settings for
+different game scenarios. By using wearable technology, which can monitor metrics such as heart rate, sleep, and activity, this study
+seeks to establish a correlation between the player's physical condition and their performance in a digital game scenario. The
+importance of fitness data in this context cannot be overstated. Heart Rate Variability (HRV), maximum heart rate, active sleep, and
+sleep quality are all essential indicators of a person's physical condition. These metrics offer a comprehensive insight into the
+user's physical condition, which can be used to improve their gaming performance.
+
+\textbf{Heart Rate Variability (HRV):} is a measure of the variation in time between each heartbeat, and it is closely linked to
+the body's stress levels. HRV is widely used as a measure of the body's autonomic nervous system, which controls the body's stress
+response. A higher HRV is associated with a lower stress level, while a lower HRV is associated with a higher stress level. A research
+from E. Ortega\cite{ortega2018pre} highlights the importance of HRV in sports science, as a way of understanding the psychological
+state of athletes before completion. It found a positive correlation between HRV, self-efficacy, and performance among sport shooters.
+Advanced shooters demonstrated lower average heart rates and employed mental skills more effectively than less experienced shooters.
+This suggests HRV as a valuable asset when transferring the psychological state of the athlete to the performance in a digital game.
+It allows for a better understanding of the player's stress levels, and how it affects their performance. This personalized approach
+can enhance player experience, and potentially improve their performance in the game.
+
+The Heart Rate Variability measurements typically requires a chest strap, and measurements typically span from 5 minutes to 24 hours,
+it is commonly used in clinical settings to evaluate cardiac conditions.\cite{malik1996heart} Short-term HRV analysis lasting less then
+5 minutes have been proven to provide more accurate estimations compared to longer measurements.\cite{mcnames2006reliability}
+Based on this, the research will focus on short-term HRV measurements, as it is more practical for the user, and it provides accurate
+estimations. It will be more detailed in the methodology section.
+
+\textbf{Heart Rate Max:} is the maximum number of times the heart can beat in a minute, and it is a measure of the body's
+cardiovascular fitness. It is an important indicator of the body's physical condition, and it is used to evaluate the body's ability
+to perform physical activities, reflecting their cardiovascular fitness. In this research, understanding HRmax is vital for assessing
+participant's fitness and endurance. It could indicate how well players can handle stress and maintain their concentration over
+extended periods of time. By analysing alongside other biometric data this research could uncover valuable insight into optimizing
+players performance in a digital game scenario.
+
+\textbf{Heart Rate Average:} is the average number of times the heart beats in a minute, and it is a measure of the body's physical
+activity. It is also an important indicator of the body's physical condition, and it is another measure of the body's
+cardiovascular fitness. It is used to evaluate the body's ability to perform physical activities, reflecting their cardiovascular
+fitness.
+
+\textbf{Active Step:} Active steps, as a measure of physical activity, is an important indicator of the body's physical condition. It is
+used to evaluate the body's ability to perform physical activities, reflecting their cardiovascular fitness. Counting the number of
+steps taken daily can help track overall physical activity, and it is a good indicator of the body's physical condition. 
+
+
+\textbf{Quality of Sleep:} are important indicators of the body's recovery and readiness for physical activity. Active sleep is a
+measure of the body's physical activity during sleep, and it is an important indicator of the body's recovery and readiness for
+physical activity. High-quality sleep, marked by sufficient duration and minimal disruptions, is fundamental for overall health
+impacting mood, and cognitive function. A research that evaluated Sleep and performance in Eathletes \cite{BONNAR2019647} underscores the
+critical role of sleep in Eathletes performance in Esports, showing its impact on cognitive functions as a crucial factor for
+competitive success. Adequate sleep improves information processing, visual motor functioning, attention, working memory, and other
+functions essential for decision-making and reaction time. On the other hand, sleep deprivation can significantly impair these
+cognitive abilities, potentially to poor performance. For this research it proves the importance of sleep in the context of gaming
+performance, and how it can be used to predict the player's readiness and tune their performance in a digital game scenario.
+
+
+
+
+\subsection{Data Analysis}
+Some selected features were dropped before analysis due to the unavailability of data and unexpected configuration of the wearable device. The Active Steps and
+Maximum heart rate were dropped from the independent variable features because of an unexpected configuration of the wearable device required the volunteers
+to manually enable some features on the device before data could be collected.
+A total of 440 data points were collected from the volunteers at the time of reporting and 92 of these data points representing 21\% were deemed valid. 
+The validity of data points was determined by the availability of data from the wearable device and the test game within the same time frame under 
+consideration. 
+Machine Learning models were designed in a pipeline to clean and normalize the data before the commencement of training and other relevant analyses. 
+Cleaning involves removing missing values, normalizing involves scaling the data to a range of 0 to 1 to ensure that no feature dominates and potentially 
+adding bias to the model. This is particularly useful as a good few of the variables were recorded in varying units. As part of the best model selection 
+algorithm incorporated into the pipeline, the data is further scaled to a mean of 0 and a standard deviation of 1 for a potentially better model.
+
+A correlation matrix was generated using the Pearson correlation coefficient algorithm to ascertain the relationship between the independent and dependent 
+variables. This provided an insight into the data and certified the independence of the independent variables from each other and on the other hand, shows
+some level of correlation between the independent and dependent variables. These correlations were further corroborated by the machine learning models 
+developed in the research to map independent variables to a dependent variable.
+
+The best model selection was incorporated into the algorithm using the GridSearchCV algorithm from the sklearn library. It involved training various models with
+a suite of M/L Algorithms (Random Forest, KNN, SVM, Logistic Regression) using various hyperparameters to determine the best model for the data. Best Model
+selection decision was based on a 5-fold cross-validation technique using a validation dataset. This technique was applied to the various dependent variables
+to get the best performant model. An Automatic Neural Network was incorporated into the pipeline to validate the results from the classical model. This 
+was done to provide a reference point to ascertain if there is likely overfitting or underfitting in the models. The Automatic Neural Network was trained
+using the same data as the classical model and the results were compared to determine if both models follow the same trend. 
+
+\subsection{Infrastructure}
+The Amazon Web Services (AWS) was used to host the web application. Various services were incorporated into the system to provide all the functionalities
+stated. The AWS RDS configured with MySQL was used to store data in an organized form, AWS EC2 was used to provide compute time and storage for the web
+application, Amazon Certificate Manager used for SSL certification, Amazon Elastic Load Balancer for load balancing and Amazon Route 53 used for domain name. 
+

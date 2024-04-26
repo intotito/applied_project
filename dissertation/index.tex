@@ -5,6 +5,7 @@
 \documentclass[english,12pt,a4paper,openany]{book}
 \usepackage{datetime}
 \usepackage{tabularx}
+\usepackage{tabularray}
 \usepackage{makecell}
 \usepackage{eurosym}
 \usepackage{pbox}
@@ -29,7 +30,9 @@
 \pagestyle{fancy}
 \renewcommand\headrulewidth{1pt}
 \usepackage{float}
-
+\usepackage{pdfpages}
+\usepackage{tocbibind}
+\usepackage{subcaption}
 %------------------------------------------------------------------------------------------------------
 %	The following are the RGB values for the official ATU colours.
 %------------------------------------------------------------------------------------------------------	
@@ -106,8 +109,11 @@
 \normalsize
 \textbf{Department of Computer Science \& Applied Physics,\\School of Science \& Computing,\\Atlantic Technological University (ATU), Galway.}\\
 \end{titlepage}
-\newpage
+
+\newgeometry{left=2cm, right=2cm, top=1.5cm, bottom=1.5cm}
 \tableofcontents
+
+\restoregeometry
 \listoffigures
 \listoftables
 \pagenumbering{arabic} 
@@ -124,6 +130,7 @@
 \include{design}
 \include{evaluation}
 \include{conclusion}
+\include{appendix}
 
 
 

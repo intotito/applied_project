@@ -1,12 +1,19 @@
 \chapter{Abstract}
-\textbf{Background and Objective} The aim of this project is to analyze the relationship between the fitness status of a gamer and their 
-performance in a digital gaming scenario. And if such relationship could be established, to determine which features affects their performance and 
-to what degree do they contribute to their performance. 
-Various biometric and fitness data were considered and used fo the analysis based on their suitability for capturing relevant fitness features that 
-correlate to on's physiological state. Heart rate variability (HRV), Average Heart Rat, maximum Heart Rate, Active Steps and quality of sleep are the 
-features under consideration. 
+The aim of this project is to develop a robust and enduring system using live data to analyze the correlation between a gamer's 
+biometrics data and performance in a digital gaming scenario and corroborate the correlation by finding a function that approximates the relationship 
+using machine learning algorithms.
 
-A test game designed to measure and capture user's performance in a first-person shooter gaming scenario was used. Three basic metrics where chosen 
-to measure user performance. They are Fine Motor Test, Visual Test and Audio Test. The Fine motor test captures the average tracking time and accuracy 
-for engaging targets, the Visual Test captures the average response time, average tracking time and accuracy while the Audio Test captures user's 
-response time. 
+Users' Biometric data were collected using a wearable device, Polar Vantage V2 and performance metrics were captured 
+with a test game designed to test users' performance in a first-person shooter gaming scenario. Volunteers were selected and enrolled to gather biometric 
+and test data. Heart Rate Variability, Heart Rate Average and Quality of Sleep were the biometric data collected and were used as the independent 
+variables for the machine learning algorithm. The dependent variables to be predicted are the user's performance metrics in the test game. 
+The performance metrics chosen were Fine Motor Average Tracking Time, Fine Motor Accuracy, Visual Average Response Time, Visual Average Tracking Time,
+Visual Accuracy and Audio Average Response Time.
+
+An on-cloud solution was proposed and implemented to access users' data and do real-time analysis. The solution was implemented using Amazon Web Services (AWS)
+as the cloud provider, Amazon Relational Database Service (RDS) as a Platform as a Service (PaaS) provider and Amazon Elastic Compute Cloud (EC2) as an
+Infrastructure as a Service (IaaS) provider.
+
+Using an already predefined algorithm, a real-time model selection, hyperparameter tuning and model training pipeline were implemented to analyze the collected 
+data. Various Machine Learning Models were developed and trained, enabling the team to make a strong case for correlation 
+between biometric data and user performance in a digital gaming scenario. 

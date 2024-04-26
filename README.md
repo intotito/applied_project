@@ -1,3 +1,4 @@
+![Atu logo](dissertation/images/atu-logo-green.png)
 # Biometric Data Analysis in Digital Game Scenario
 
 ## Project Objective
@@ -14,12 +15,34 @@ Year 4 Project/Minor Dissertation
 The diagram below gives a summary of objectives to be achieved towards successful completion of the project. 
 ![Alt text](images/proj_obj.png)
 
-## System Architecture
+## Proposed System Architecture
 The diagram below shows a summary of the system architecture. 
 ![Alt text](images/architecture1.png)
 
+## Final System Architecture
+![Alt text](dissertation/images/architecture_color.png)
 
-## Installations
+
+## Controller UML
+![Controller UML](dissertation/images/uml_controller.png)
+
+## Database Schema
+![Database Schema](dissertation/images/db_schema.png)
+
+## Screenshot
+![Screenshot](dissertation/images/dashboard.png)
+
+
+## Controller Source Code
+`./controller/src`
+
+## AI Model Source Code
+`./tensorflow`
+
+## Dissertation and Documentation
+`./dissertation/index.pdf`
+
+# Installations
 
 ## Firebase
 
@@ -163,11 +186,15 @@ server {
         }
 
         location /dashboard {
-                proxy_pass http://localhost:8000;
+                proxy_pass http://localhost:4200;
         }
 }
 
 ```
+
+## Installing Scikit-learn
+
+`pip install -U scikit-learn`
 
 ## Running Controller
 
@@ -177,3 +204,11 @@ server {
 ### Running as daemon  
 
 `pm2 start ./src/index.js`
+
+### JSON Web Token
+
+`npm install jsonwebtoken`
+
+### Install Mocha
+
+`npm install --global mocha`
