@@ -35,7 +35,9 @@ The diagram below shows a summary of the system architecture.
 ## Screencast
 `dissertation/videos/screencast.mp4`
 
-<video controls src="./dissertation/videos/screencast.mp4" title="Screen Cast"></video>
+
+[![Screencast Demonstration](dissertation/images/thumbnail.png)](
+https://atlantictu.sharepoint.com/:v:/s/Student-Year3Project/Ec00e-vwu2BPn4_7Q2HVynYBERmvVTrXGPsoNKjCePZF5w?e=hLNgXZ)
 
 ## Controller Source Code
 `./controller/src`
