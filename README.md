@@ -35,11 +35,7 @@ The diagram below shows a summary of the system architecture.
 ## Screencast
 `dissertation/videos/screencast.mp4`
 
-<video width="320" height="240" controls>
-  <source src="./dissertation/videos/screencast.mp4" type="video/mp4">
-  
-</video>
-
+<video controls src="./dissertation/videos/screencast.mp4" title="Screen Cast"></video>
 
 ## Controller Source Code
 `./controller/src`
