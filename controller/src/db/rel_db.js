@@ -4,19 +4,22 @@ const {formatDate} = require('.././utils/utils');
 const fs = require('fs');
 
 initializeDatabase = async function (){
+ //   console.log('Initializing Database', process.env.DB_ADDRESS, process.env.DB_USER, process.env.DB_PASSWORD, process.env.DB_DATABASE);
     const rel_db = mysql.createConnection({
         host: process.env.DB_ADDRESS,
         user: process.env.DB_USER,
         password: process.env.DB_PASSWORD, 
         database: process.env.DB_DATABASE
-    })
+    });
+ //   console.log('Database Initialized', rel_db);
     const dbPromise = new Promise((resolve, reject) => {
    //     console.log(process.env);
         rel_db.connect((err) => {
             if(!err){
+     //           console.log('-------------------------------- Connected to Database');
                 resolve(rel_db);
             } else {
-                console.log(err);
+                console.log('--------------------------------', err);
                 reject(err);
             }
         });
@@ -98,6 +101,7 @@ getLatestSyncDate = async function (db){
 // this function gets the dataset from the database
 getDataSet = async function(whereClause){
     return new Promise(async (resolve, reject) => {
+        console.log('intialize db');
         const mysql_db = await initializeDatabase();
         const query = `SELECT * FROM Stats ${whereClause};`
         mysql_db.query(query, (error, result, field) => {
