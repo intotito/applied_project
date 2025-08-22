@@ -4,9 +4,11 @@ const jwt = require("jsonwebtoken");
 authorizeBearer = function(req, res, next) {
     if(req.headers && req.headers.authorization){
         let token = req.headers.authorization.split(' ')[1];
+        console.log('Token: ', token, process.env.API_JWT_KEY);
         const decodedToken = jwt.verify(token, process.env.API_JWT_KEY);
         if(decodedToken){
             res.locals.userId = decodedToken.userId;
+            console.log('Authorization Successful');
             next();
         } else {
             res.status(401).send('<h1>Unauthorized, Invalid or Expired Token</h1>');

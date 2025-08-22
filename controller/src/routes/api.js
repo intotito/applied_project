@@ -29,6 +29,7 @@ router.get('/dataset', authorizeBearer, (req, res) => {
         }
         whereClause = qry;
     }
+    console.log('Will get dataset: ');
     getDataSet(whereClause).then((value) => {
         res.json(value);
     }).catch(error => {
@@ -57,6 +58,7 @@ router.get('/ai/:id', (req, res) => {
     try{
         // create a temporary folder for the session
         tmpDir = fs.mkdirSync(path.join(os.tmpdir(), hash));
+        
     } catch (err){
         console.error(err);
     } 

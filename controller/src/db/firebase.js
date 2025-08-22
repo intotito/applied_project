@@ -1,4 +1,4 @@
-const {initializeApp} = require('firebase-admin/app')
+const {initializeApp, getApp} = require('firebase-admin/app')
 const {getFirestore} = require('firebase-admin/firestore')
 const {compareDates} = require('./../utils/utils')
 
@@ -23,8 +23,19 @@ const firebaseConfig = {
     appId: APP_ID,
     measurementId: MEASUREMENT_ID
 };
+
+var admin = require("firebase-admin");
+
+var serviceAccount = require("../../logs/s_account.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://y4-applied-project-default-rtdb.firebaseio.com"
+});
+
+
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+//const app = initializeApp(firebaseConfig);
 
 // fetches data from firebase
 fetchData = async function (start){
@@ -32,6 +43,13 @@ fetchData = async function (start){
     return new Promise(async (resolve, reject) => {
         data = [];
         dataWatch = [];
+        const count =   db.collection('pubg').count().get()
+        .then((snapshot) => {
+            console.log('Count:', snapshot.size);
+        })
+        .catch((error) => {
+            console.error('Error Counting:', error);
+        });
         const querySnapshot = await db.collection('users').get();
         for(let j = 0; j < querySnapshot.docs.length; j++){
             let result = querySnapshot.docs[j];

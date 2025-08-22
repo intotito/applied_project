@@ -5,7 +5,7 @@
   "main": "/src/index.js",
   "scripts": {
     "test": "mocha test/test.js --exit",
-    "start": "node src/index.js"
+    "start": "cd src && node index.js"
   },
   "keywords": [
     "Controller",
